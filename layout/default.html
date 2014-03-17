@@ -1,0 +1,35 @@
+{% extends base_layout %}
+
+{% block theme_head %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+    
+<body>
+{% block theme_body %}
+	{% block header %}
+	<header>
+		{{ su.site.name }}
+		<br />
+		{{ su.site.secondline }}
+	</header>
+	{% endblock %}
+	
+	{% block navigation %}
+	<nav>
+		{{ su.macro.token( "navigation" ) }}
+	</nav>
+	{% endblock %}
+	
+	{% block wrapper %}
+	<article>
+		{{ su.content }}
+	</article>
+	{% endblock %}
+
+	{% block footer %}
+	<footer>
+		{{ su.footer }}
+	</footer>
+	{% endblock %}
+{% endblock %}
+</body>
