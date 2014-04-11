@@ -3,6 +3,11 @@
 {% block wrapper %}
     <div class="row">
         <div class="col-md-8"><article>{{ parent() }}</article></div>
-        <div class="col-md-4"><aside>{{ su.macro.token( "custom1" ) }}</aside></div>
+        <div class="col-md-4">
+            <aside>{{ su.macro.token( "custom1" ) }}</aside>
+            <aside>{{ su.macro.token( "custom2" ) }}</aside>
+            <aside>{{ su.macro.token( "custom3" ) }}</aside>
+            <aside>{{ su.macro.token( "custom4" ) }}</aside>
+        </div>
 	</div>
 {% endblock %}
