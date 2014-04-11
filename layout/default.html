@@ -36,18 +36,18 @@
 	
 	<section>
 		<div class="container">
-            {% block wrapper %}
-                {{ su.content }}
-            {% endblock %}
+		{% block wrapper %}
+			{{ su.content }}
+		{% endblock %}
 		</div>
 	</section>
 
 	<footer>
-        <div class="container">
-            {% block footer %}
-                    {{ su.footer }}
-            {% endblock %}
+		<div class="container">
+		{% block footer %}
+			{{ su.footer }}
+		{% endblock %}
 		</div>
-    </footer>
+	</footer>
 </body>
 {% endblock %}
