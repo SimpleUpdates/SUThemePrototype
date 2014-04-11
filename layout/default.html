@@ -6,15 +6,15 @@
 
 {% block theme_body %}
 <body>
-	{% block header %}
 	<header>
-        <div class="container">
-            <h1>{{ su.site.name }}</h1>
-            <br />
-            <h2>{{ su.site.secondline }}</h2>
-		</div>
+        {% block header %}
+            <div class="container">
+                <h1>{{ su.site.name }}</h1>
+                <br />
+                <h2>{{ su.site.secondline }}</h2>
+            </div>
+        {% endblock %}
 	</header>
-	{% endblock %}
 	
 	<nav>
         {% block navigation %}
