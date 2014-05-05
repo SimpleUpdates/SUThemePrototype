@@ -1,7 +1,8 @@
 {% extends base_layout %}
 
 {% block theme_head %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ su.site.name }}{% if su.article.title != "" %} : {{ su.article.title }}{% endif %}</title>
 {% endblock %}
 
 {% block theme_body %}
@@ -12,6 +13,12 @@
 			<h1>{{ su.site.name }}</h1>
 			<br />
 			<h2>{{ su.site.secondline }}</h2>
+			<br />
+			<div id="icons">
+			{% for name, value in su.social %}
+				<a class="social-btn-bg" href="{{ value }}" target="_blank"><i class="icon-{{ name }}"></i></a>
+			{% endfor %}
+			</div>
 		</div>
 	{% endblock %}
 	</header>
