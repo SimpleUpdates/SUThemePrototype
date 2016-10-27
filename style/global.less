@@ -1,0 +1,51 @@
+@font: Arial, Helvetica, sans-serif;
+@accent-color: @config-accentColor;
+@secondaryColor: lighten(desaturate(@accent-color, 10%), 20%);
+@white: #fafafa;
+
+.su_bootstrap_safe {
+	a {
+		color: @accent-color;
+		&:hover {
+			color: @secondaryColor;
+		}
+	}
+	h1, h2, h3, h4, h5, h6 {
+		color: @accent-color;
+	}
+}
+header {
+	margin-top: 2em;
+	@media (max-width: 767px) {
+		margin-top: .5em;
+	}
+}
+.banner-image {
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+#icons {
+	float: right;
+	width: 25%;
+	text-align: right;
+	font-size: 1.25em;
+	padding: 1em;
+	> a {
+		padding: 0 .35em;
+	}
+	@media (max-width: 767px) {
+		padding: .5em 1em;
+	}
+}
+#content {
+	padding: 2em 15px;
+	min-height: 20em;
+}
+footer {
+	text-align: center;
+	padding: 1.5em 15px;
+	color: @accent-color;
+	font-size: .8em;
+	border-top: 1px solid @white;
+}
+
