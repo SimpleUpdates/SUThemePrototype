@@ -14,9 +14,9 @@
 			<br />
 			<h2>{{ su.site.secondline }}</h2>
 			<br />
-			<div id="icons">
+			<div class="icons">
 			{% for social in su.social %}
-				<a class="social-btn-bg" href="{{ social.url }}" target="_blank"><i class="{{ social.icon }}"></i></a>
+				<a class="social-btn-bg" href="{{ social.url }}" target="_blank">{{ getIcon( social.icon ) }}</a>
 			{% endfor %}
 			</div>
 		</div>
