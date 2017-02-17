@@ -21,8 +21,8 @@ if ( doesFade || doesSlide ) {
 	}
 
 	if ( doesSlide ) {
-		var leftImages = jQuery(".block--left img:not(.hidden), .section-image.left:not(.hidden)");
-		var rightImages = jQuery(".block--right img:not(.hidden), .section-image.right:not(.hidden)");
+		var leftImages = jQuery(".block--left img:not(.hidden)");
+		var rightImages = jQuery(".block--right img:not(.hidden)");
 		leftImages.css("position", "relative");
 		rightImages.css("position", "relative");
 		leftImages.css("left","-50%");
