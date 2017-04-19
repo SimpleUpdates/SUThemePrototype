@@ -1,0 +1,8 @@
+<address class="contact-info">
+	{{ su.site.name }}
+	{% if su.site.address %} | {% endif %} {{ su.site.address }}
+	{% if su.site.city %}
+		| {% endif %} {{ su.site.city }}{% if su.site.city %},{% endif %} {{ su.site.state }} {{ su.site.zip }}
+	{% if su.site.phone %} | {% endif %} <a class="phone"
+			href="tel:{{ su.site.phone }}">{{ su.site.phone }}</a>
+</address>

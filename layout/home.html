@@ -1,6 +1,22 @@
 {% extends "layout/default.html" %}
 
-{% block wrapper %}
-	{{ parent() }}
-	<aside>{{ su.editable.region( "custom1" ) }}</aside>
+{% set body_class = "home" %}
+
+{% block heroImage %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="hero no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 425 ) }}' );"{% endif %}></div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_wrapper %}
+	<div class="row">
+		<div class="col-sm-8">
+			{{ parent () }}
+		</div>
+		<div class="col-sm-4 sidebar">
+			{% include "partial/subpages.html" %}<br /><br />
+			{{ su.editable.region( "sidebar" ) }}</div>
+	</div>
 {% endblock %}

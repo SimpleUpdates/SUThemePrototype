@@ -1,0 +1,25 @@
+.breadcrumbs {
+	font-size: 1em;
+	display: inline-block;
+	&:last-child {
+		font-weight: bold;
+		font-size: 2em;
+	}
+}
+.separator, .separator-last {
+	margin-left: .25em;
+	margin-right: .35em;
+}
+.separator:first-child {
+	display: none;
+}
+.share.btn-group, .share.btn-vertical {
+	float: right;
+	.btn-default {
+		color: @black;
+		font-size: 1em;
+		border: 1px solid @black;
+		font-weight: 300;
+		padding: 0 20px;
+	}
+}

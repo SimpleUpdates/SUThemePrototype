@@ -1,0 +1,23 @@
+{% for crumb in su.page.breadcrumbs %}
+	{% if loop.last %}
+		<span class="breadcrumbs-last">{{ crumb.title }}</span>
+	{% else %}
+		<a class="breadcrumbs" href="{{ crumb.url }}">{{ crumb.title }}</a><span class="separator">></span>
+	{% endif %}
+{% endfor %}
+
+{% set sharelinks = su.page.sharelinks %}
+{% if sharelinks %}
+	<div class="share btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Share <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+		{% for sharelink in sharelinks %}
+			<li>
+				<a href="{{ sharelink.url }}">{{ getIcon( sharelink.icon ) }} {{ sharelink.title }}</a>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+{% endif %}

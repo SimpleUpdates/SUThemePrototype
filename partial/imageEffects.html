@@ -1,0 +1,54 @@
+<script src="{{ su.theme.asset( "scrollreveal.min.js" ) }}" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery( '.block[data-sr-id]' ).removeAttr( 'data-sr-id' ).removeAttr( 'style' );
+	
+	window.sr = ScrollReveal();
+	
+	var doesFade = {{ ( "Fade" in ""~su.theme.config( "imageLoadEffect" ) ) ? "true" : "false" }};
+	var doesSlide = {{ ( "Slide" in ""~su.theme.config( "imageLoadEffect" ) ) ? "true" : "false" }};
+
+	var duration = 750;
+	var delay = 50;
+	var distance = '5%';
+
+	if ( doesFade && doesSlide ) {
+		sr.reveal( '.block--right[data-type="image"]', {
+			scale: 1,
+			origin: 'right',
+			distance: distance,
+			duration: duration,
+			delay: delay
+		} );
+		sr.reveal( '.block[data-type="image"]:not( .block--right )', {
+			scale: 1,
+			origin: 'left',
+			distance: distance,
+			duration: duration,
+			delay: delay
+		} );
+	} else if ( doesFade ) {
+		sr.reveal( '.block[data-type="image"]', {
+			scale: 1,
+			distance: 0,
+			duration: duration,
+			delay: delay
+		} );
+	} else if ( doesSlide ) {
+		sr.reveal( '.block--right[data-type="image"]', {
+			scale: 1,
+			opacity: 1,
+			origin: 'right',
+			distance: distance,
+			duration: duration,
+			delay: delay
+		} );
+		sr.reveal( '.block[data-type="image"]:not( .block--right )', {
+			scale: 1,
+			opacity: 1,
+			origin: 'left',
+			distance: distance,
+			duration: duration,
+			delay: delay
+		} );
+	}
+</script>

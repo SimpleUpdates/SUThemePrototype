@@ -1,47 +1,106 @@
-@font: Arial, Helvetica, sans-serif;
-@accent-color: @config-accentColor;
-@secondaryColor: lighten(desaturate(@accent-color, 10%), 20%);
-@white: #fafafa;
+@font: arial, helvetica, sans-serif;
+
+@primaryColor:	@config-primaryColor;
+@white:						#fff;
+@black:						#000;
+
+@screenSmMin: 768px;
+@screenMdMin: 992px;
+@screenLgMin: 1200px;
+
+@screenXsMax: ( @screenSmMin - 1 );
+@screenSmMax: ( @screenMdMin - 1 );
+@screenMdMax: ( @screenLgMin - 1 );
+
+.transition( @property, @duration ) {
+	-webkit-transition: @property @duration;
+	-moz-transition: @property @duration;
+	-ms-transition: @property @duration;
+	-o-transition: @property @duration;
+	transition: @property @duration;
+}
+
+.transform-style( @style ) {
+	-webkit-transform-style: @style;
+	-moz-transform-style: @style;
+	-ms-transform-style: @style;
+	transform-style: @style;
+}
+
+.transform( @transformation ) {
+	-webkit-transform: @transformation;
+	-moz-transform: @transformation;
+	-ms-transform: @transformation;
+	-o-transform: @transformation;
+	transform: @transformation;
+}
+
+/* Sticky Footer */
+html, body {
+	min-height: 100vh;
+}
+body {
+	display: flex;
+	flex-direction: column;
+}
+header, footer {
+	flex: none;
+}
+.content {
+	flex: 1 0 auto;
+}
 
 .su_bootstrap_safe {
-	a {
-		color: @accent-color;
-		&:hover {
-			color: @secondaryColor;
+
+	body {
+		background-color: @white;
+		font-size: 15px;
+		color: @black;
+		font-family: @font;
+	}
+	.content {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+	}
+	.sidebar {
+		@media ( max-width: @screenXsMax ) {
+			border-top: 1px solid @primaryColor;
+			padding-top: 2rem;
+			margin-top: 2rem;
 		}
 	}
-	h1, h2, h3, h4, h5, h6 {
-		color: @accent-color;
-	}
-}
-header {
-	margin-top: 2em;
-	@media (max-width: 767px) {
-		margin-top: .5em;
-	}
-}
-.banner-image {
-	background-size: cover;
-	background-repeat: no-repeat;
-}
-.icons {
-	float: right;
-	width: 25%;
-	text-align: right;
-	font-size: 1.25em;
-	padding: 1em;
-	> a {
-		padding: 0 .35em;
-	}
-	@media (max-width: 767px) {
-		padding: .5em 1em;
-	}
-}
-footer {
-	text-align: center;
-	padding: 1.5em 15px;
-	color: @accent-color;
-	font-size: .8em;
-	border-top: 1px solid @white;
-}
 
+	/* Core Tweaks */
+	.fc-view-container {
+		background-color: @white;
+	}
+
+	h1, h2, h3, h4, h5 {
+		font-family: @font;
+	}
+	h1.page-title {
+		text-align: center;
+		border-bottom: 1px solid @primaryColor;
+		padding-bottom: 1rem;
+		margin-bottom: 3rem;
+	}
+	a {
+		transition: border .5s;
+		color: @primaryColor;
+		&:hover {
+			text-decoration: none;
+			color: @black;
+		}
+	}
+
+@import "blockquote.less";
+@import "branding.less";
+@import "breadcrumbsShare.less";
+@import "contactInfo.less";
+@import "footer.less";
+@import "hero.less";
+@import "navigation.less";
+@import "search.less";
+@import "socialIcons.less";
+@import "subpages.less";
+}

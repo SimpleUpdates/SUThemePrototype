@@ -1,0 +1,36 @@
+<div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+</div>
+<nav class="site-nav">
+	<div class="container">
+		<div class="navbar-collapse collapse" style="height: 1px;">
+			<ul class="nav navbar-nav">
+				{% for page in su.site.sitemap %}
+					{% set hasChildren = page.hasChildren and page.hasParent %}
+					<li class="{% if page.current %}active{% endif %} {% if hasChildren %}has-children{% endif %}">
+						<a href="{{ page.url }}" target="{{ page.target }}">{{ page.navigationLabel }}</a>
+						{% if hasChildren %}
+							<input type="checkbox" class="toggle" />
+							<div class="arrow"><span class="caret"></span></div>
+							<ul>
+								{% for child in page.children %}
+									<li{% if child.current %} class="active"{% endif %}><a href="{{ child.url }}">{{ child.navigationLabel }}</a></li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+<script>
+	jQuery('.toggle').click(function() {
+		jQuery(this).parent().toggleClass('js-open');
+	});
+</script>
