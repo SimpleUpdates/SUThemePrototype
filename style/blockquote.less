@@ -1,0 +1,42 @@
+blockquote, .quote {
+	font-weight: 300;
+	font-size: 1.15em;
+	font-style: italic;
+	padding: 2em 5em 2em 3em;
+	margin: 0;
+	display: inline-block;
+	border-left: 0 solid transparent;
+	quotes: "\201C" "\201D" "\2018" "\2019";
+	position: relative;
+	opacity: .7;
+	p {
+		margin: 0;
+	}
+	footer {
+		padding: 0 1em;
+		border-top: 0 solid transparent;
+		color: @black;
+		background-color: @white;
+		text-align: right;
+		margin-bottom: 0;
+		border-bottom: 0 solid transparent;
+	}
+}
+blockquote:before {
+	color: fadeout( @primaryColor, 60% );
+	content: open-quote;
+	font-size: 8em;
+	position: absolute;
+	top: -2rem;
+	left: -1.15rem;
+	font-family: 'Alegreya Sans SC', sans-serif;
+}
+blockquote:after {
+	color: fadeout( @primaryColor, 60% );
+	content: close-quote;
+	font-size: 8em;
+	position: absolute;
+	bottom: -6rem;
+	right: 4rem;
+	font-family: 'Alegreya Sans SC', sans-serif;
+}

@@ -1,1 +1,16 @@
 {% extends "layout/default.html" %}
+
+{% set body_class = "open" %}
+
+{% block heroImage %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="hero no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 165 ) }}' );"{% endif %}></div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_wrapper %}
+	{{ parent () }}<br /><br />
+	{% include "partial/subpages.html" %}
+{% endblock %}

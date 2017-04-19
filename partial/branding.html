@@ -1,0 +1,11 @@
+<div class="branding">
+	{% if su.site.logo %}
+	<a href="/" class="logo">
+		<div class="logo-image" style="background-image:url('{{ su.site.logo.fit(50, 50) }}');"></div>
+	</a>
+	{% endif %}
+	<div class="titles">
+		<h1><a href="/">{{ su.site.name }}</a></h1>
+		{% if su.site.secondline %}<h2>{{ su.site.secondline }}</h2>{% endif %}
+	</div>
+</div>
