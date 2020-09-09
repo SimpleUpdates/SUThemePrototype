@@ -1,0 +1,22 @@
+{% if not blog_action %}
+	{% spaceless %}
+	<div class="contentOptions">
+		<h2 class="page-title">{{ su.editable.title }}</h2>
+		
+		{% if su.page.hasParent %}
+			{% if su.theme.config( "showAuthor" ) and su.page.authors|length > 0 %}
+				<span class="contentOptions__byline">By: {{ su.page.authors|join( ', ' ) }}</span>
+			{% endif %}
+			
+			{% if su.theme.config( "showPublishedDate" ) %}
+				<span class="contentOptions__published">Published: {{ su.page.publishedAt|date( "F j, Y" ) }}</span>
+			{% endif %}
+			
+			{% if su.theme.config( "showUpdatedDate" ) %}
+				<span class="contentOptions__updated">Updated: {{ su.page.updatedAt|date( "F j, Y" ) }}</span>
+			{% endif %}
+		{% endif %}
+	</div>
+	{% endspaceless %}
+{% endif %}
+

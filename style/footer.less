@@ -1,15 +1,52 @@
-footer {
-	background: @black;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	color: @white;
-	a {
-		color: @primaryColor;
-		&:hover {
-			color: @white;
+.footerWrapper {
+	background-color: @headerBlockColor;
+	padding-top: 1.15em;
+	.contentFooter {
+		@backgroundColor: @headerBlockColor;
+		@textColor: contrast( @backgroundColor, @white, @black );
+		@linkColor: @textColor;
+		color: @textColor;
+		.address-box {
+			flex: 1 1 auto;
+		}
+		.social-search {
+			//flex: 1 1 200px;
+		}
+		a.phone {
+			text-align: left;
+			color: @linkColor !important;
+		}
+		@media ( max-width: @screenXsMax ) {
+			flex-direction: column;
+			align-items: initial;
+			.search {
+				float: left;
+				margin-top: 1rem;
+			}
+			.socialIcons {
+				margin-right: initial;
+				margin-left: -@socialLinks__innerMargin;
+				ul {
+					text-align: left;
+				}
+			}
 		}
 	}
-	.su-footer {
-		text-align: center;
+}
+
+.pageFooter {
+	@textColor: fade( contrast( @headerBlockColor, @black, @white ), 40% );
+	@linkColorHover: contrast( @headerBlockColor, @accentColorDark, @accentColorBleached );
+	@linkColor: fade( @linkColorHover, 80% );
+
+	padding: 15px;
+	color: @textColor;
+	a {
+		color: @linkColor;
+		text-decoration: underline;
+		&:hover {
+			color: @linkColorHover;
+			text-decoration: none;
+		}
 	}
 }

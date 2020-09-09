@@ -1,11 +1,41 @@
-<div class="branding">
-	{% if su.site.logo %}
-	<a href="/" class="logo">
-		<div class="logo-image" style="background-image:url('{{ su.site.logo.fit(50, 50) }}');"></div>
-	</a>
-	{% endif %}
-	<div class="titles">
-		<h1><a href="/">{{ su.site.name }}</a></h1>
-		{% if su.site.secondline %}<h2>{{ su.site.secondline }}</h2>{% endif %}
+{% set logo = ( logo is defined ) ? logo : su.site.logo.fit( 500, 110 ) %}
+{% set logoLeft	= ( logo is defined ) ? logo : su.site.logo.fit( 500, 110 ) %}
+{% set sitename = ( sitename is defined ) ? sitename : su.site.name %}
+{% set slogan = ( slogan is defined ) ? slogan : su.site.secondline %}
+{% set alignment = ( alignment is defined ) ? alignment : su.config.headerAlignment %}
+
+<header class="branding">
+	<div class="container">
+		{% if alignment == "Center" %}
+			<div class="brandingCenter">
+				{% if logo %}
+					<a href="/" class="logo"><img alt="logo" src="{{ logo }}" /></a>
+				{% endif %}
+				{% if su.theme.config( "showSiteTitle" ) %}
+					<a href="/">
+						<h1 class="sitename">
+							<span class="sitename">{{ sitename|e|replace( {'®': '<sup><small>&reg;</small></sup>'} )|raw }}</span>
+						</h1>
+					</a>
+				{% endif %}
+				<p class="slogan">{{ slogan|e|replace( {'®': '<sup><small>&reg;</small></sup>'} )|raw }}</p>
+			</div>
+		{% else %}
+			<div class="brandingLeft">
+				{% if logoLeft %}
+					<a href="/" class="logo"><img alt="logo" src="{{ logo }}" /></a>
+				{% endif %}
+				<div class="text">
+					{% if su.theme.config( "showSiteTitle" ) %}
+						<a href="/">
+							<h1 class="sitename">
+								<span class="sitename">{{ sitename|e|replace( {'®': '<sup><small>&reg;</small></sup>'} )|raw }}</span>
+							</h1>
+						</a>
+					{% endif %}
+					<p class="slogan">{{ slogan|e|replace( {'®': '<sup><small>&reg;</small></sup>'} )|raw }}</p>
+				</div>
+			</div>
+		{% endif %}
 	</div>
-</div>
+</header>

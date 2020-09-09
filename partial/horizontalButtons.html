@@ -1,0 +1,43 @@
+{% set stored_button_items = su.collection( "customButtons" ).find() %}
+{% set button_items = [] %}
+{% for button_item in stored_button_items %}
+	{% set is_activated = "now"|date( 'Y-m-d' ) >= button_item.activationDate|date( 'Y-m-d' ) %}
+	{% set is_not_deactivated = not button_item.deactivationDate or "now"|date( 'Y-m-d' ) < button_item.deactivationDate|date( 'Y-m-d' ) %}
+	{% if is_activated and is_not_deactivated %}
+		{% set button_items = button_items|merge( [ button_item ] ) %}
+	{% endif %}
+{% endfor %}
+<div class="container">
+<div class="row circle-nav no-print {% if not button_items %}empty{% endif %}" {{ su.editable.collection( "customButtons" ) }}>
+	{% if button_items %}
+		{% set numItems = button_items|length %}
+		{% set option = su.theme.config( "buttonsPerRow" ) %}
+		{% if option == "3" %}
+			{% set limit = 3 %}
+		{% elseif option == "4" %}
+			{% set limit = 4 %}
+		{% elseif option == "5" %}
+			{% set limit = 5 %}
+		{% elseif option == "6" %}
+			{% set limit = 6 %}
+		{% else %}
+			{% set limit = 7 %}
+		{% endif %}
+		{% set numPerRow = ( numItems > limit ) ? limit : numItems %}
+		{% set size = ( numPerRow > 0 ) ? ( 100 / numPerRow ) : 25 %}
+		{% set style = "width: "~size~"%;" %}
+		
+		{% for button in button_items %}
+			{% set vars = {
+				'style': style,
+				'src': button.image.fill( 200, 200 ),
+				'url': button.url,
+				'title': button.title,
+				'classes': ( loop.index % numPerRow == 1 ) ? 'clear' : '',
+				'openInNewWindow': button.urlTarget
+			} %}
+			{% include "partial/imageButton.html" with vars only %}
+		{% endfor %}
+	{% endif %}
+</div>
+</div>

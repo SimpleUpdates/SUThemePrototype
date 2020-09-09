@@ -1,169 +1,388 @@
-.navbar-header {
-	position: absolute;
-	right: 0;
-	z-index: 200;
-	.navbar-toggle {
-		background-color: @white;
-		position: absolute;
-		top: 0;
-		right: 0;
-		.icon-bar {
-			background-color: @black;
-			height: 3px;
-		}
-	}
-}
-.site-nav {
-	background-color: @white;
-	z-index: 100;
-	.navbar-nav {
-		float: none;
-		text-align: center;
-	}
-	li {
-		position: relative;
-		text-align: left;
-	}
-	li a {
-		color: @primaryColor;
-		font-weight: bold;
-		line-height: 3rem;
-		padding: 0 1rem;
-		margin-top: 1px;
-		&:hover, &:focus {
-			background-color: transparent;
-			color: @black;
-		}
-	}
-	.toggle {
-		width: 3rem;
-		height: 3rem;
-		z-index: 1000;
-		position: absolute;
-		right: 0;
-		top: 0;
-		margin-top: 0;
-		opacity: 0;
-		cursor: pointer;
-	}
-	.arrow {
-		width: 3rem;
-		height: 3rem;
-		position: absolute;
-		z-index: 500;
-		right: 0;
-		top: 0;
-		color: @primaryColor;
-		border-left: 1px solid @primaryColor;
+@themeNavigation__mobileDrawerSelector: ~".module-themeNavigation__mobileToggle:checked ~ ul";
+@themeNavigation__arrowPosition: @themeNavigation__linkHorizontalPadding / 2;
+@themeNavigation__burgerWidth: 65px;
+
+.module-themeNavigation {
+	background-color: @themeNavigation__backgroundColor;
+	font-size: @themeNavigation__fontSize;
+	display: flex;
+	width: 100%;
+	.module-themeNavigation__before,
+	.module-themeNavigation__after {
+		flex: 1 0 auto;
+		max-width: calc( ~"100% - @{themeNavigation__burgerWidth}" );
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		.caret {
-			border-top: 12px dashed;
-			border-top: 12px solid \9;
-			border-right: 8px solid transparent;
-			border-left: 8px solid transparent;
-			.transition( transform, 400ms );
-			.transform-style( preserve-3d );
-		}
 	}
-	li.active, li.js-open, li:focus {
-		> a {
-			color: @primaryColor;
-		}
+	.module-themeNavigation__before {
+		margin-right: 1em;
 	}
-	ul ul {
-		max-height: 0;
-		.transition( max-height, 400ms );
+	.module-themeNavigation__after {
+		margin-left: 1em;
+	}
+	.module-themeNavigation__nav {
+		height: @themeNavigation__linkHeight;
 		overflow: hidden;
-		padding-left: 0;
-		li {
-			display: block;
-		}
-		a {
-			display: block;
-			padding-left: 3rem;
-		}
-	}
-	.toggle:checked {
-		~ .arrow .caret {
-			.transform( rotateX( 180deg ) );
-		}
-		~ ul {
-			max-height: 400px;
-		}
-	}
-	@media ( max-width: @screenXsMax ) {
-		position: absolute;
-		top: 0;
-		width: 100vw;
-		z-index: 100;
-		.navbar-collapse {
-			margin-top: 2.5rem;
-			box-shadow: none;
-		}
-	}
-	@media ( min-width: @screenSmMin ) {
-		background-color: fadeout( @primaryColor, 70% );
-		.navbar-collapse {
+		display: flex;
+		flex-wrap: wrap;
+		min-width: @themeNavigation__burgerWidth;
+		position: static;
+		flex: 1 1 100%;
+		> ul {
+			flex: 1 0 100%;
+			margin-bottom: 0;
 			padding-left: 0;
-			padding-right: 0;
+			text-align: @themeNavigation__alignment;
+			white-space: nowrap;
 		}
-		li {
-			float: none;
-			display: inline-block;
-			a, a:focus {
-				margin-top: 0;
-				color: @primaryColor;
+		& when not ( @themeNavigation__mobileBreakpoint = auto ) {
+			height: auto;
+			> ul {
+				white-space: normal;
 			}
-		}
-		li.has-children > a {
-			padding-right: 1.5rem;
-			z-index: 10000;
-		}
-		li.active, li.js-open, li:focus, li:hover {
-			background-color: @white;
-			> a {
-				color: @primaryColor;
-			}
-		}
-		li:hover  {
-			.caret {
-				.transform( rotateX( 180deg ) );
-			}
-			ul {
-				max-height: 400px;
-			}
-		}
-		li, li.active, li.js-open, li:hover, li:focus {
-			.arrow {
-				color: @primaryColor;
-				width: 2rem;
-				padding-right: .3rem;
-				border-left: none;
-				.caret {
-					top: -1px;
-					border-top: 4px dashed;
-					border-top: 4px solid \9;
-					border-right: 4px solid transparent;
-					border-left: 4px solid transparent;
+			@media ( max-width: @themeNavigation__mobileBreakpoint ) {
+				height: @themeNavigation__linkHeight;
+				> ul {
+					flex: 1 0 200%;
+					white-space: nowrap;
 				}
 			}
 		}
-		ul ul {
+		@media print {
+			display: none;
+		}
+	}
+
+	.module-themeNavigation__transition( @property, @duration ) {
+		-webkit-transition: @property @duration;
+		-moz-transition: @property @duration;
+		-ms-transition: @property @duration;
+		-o-transition: @property @duration;
+		transition: @property @duration;
+	}
+	
+	.module-themeNavigation__transformStyle( @style ) {
+		-webkit-transform-style: @style;
+		-moz-transform-style: @style;
+		-ms-transform-style: @style;
+		transform-style: @style;
+	}
+	
+	.module-themeNavigation__transform( @transformation ) {
+		-webkit-transform: @transformation;
+		-moz-transform: @transformation;
+		-ms-transform: @transformation;
+		-o-transform: @transformation;
+		transform: @transformation;
+	}
+	.module-themeNavigation-arrow {
+		color: @themeNavigation__arrowColor;
+		width: 0;
+		height: auto;
+		position: relative;
+		right: @themeNavigation__arrowPosition;
+		.module-themeNavigation__caret {
+			pointer-events: none;
 			position: absolute;
-			z-index: 100;
-			padding-left: 0;
-			min-width: 10rem;
-			background-color: @white;
-			li {
-				min-height: 2.5rem;
-			}
-			a {
-				padding-left: 1rem;
-				line-height: 2.5rem;
-				white-space: nowrap;
+			right: 0;
+			top: -1px;
+			border-top: 4px dashed;
+			border-top: 4px solid \9;
+			border-right: 4px solid transparent;
+			border-left: 4px solid transparent;
+			.module-themeNavigation__transition( transform, 400ms );
+			.module-themeNavigation__transformStyle( preserve-3d );
+		}
+	}
+	
+	@{themeNavigation__mobileDrawerSelector} .module-themeNavigation-arrow {
+		width: @themeNavigation__mobileArrowSize;
+		height: @themeNavigation__mobileArrowSize;
+		color: @themeNavigation__mobileArrowColor;
+		margin-bottom: 0;
+		border-left: 1px solid @themeNavigation__mobileLinkBorderColor;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		right: 0;
+		top: 0;
+		.module-themeNavigation__caret {
+			position: relative;
+			top: -1px;
+			right: auto;
+			.module-themeNavigation__transform( rotateX( 0 ) );
+		}
+	}
+	.module-themeNavigation__burger {
+		text-align: @themeNavigation__mobileHamburgerAlignment;
+		color: @themeNavigation__linkColor;
+		min-width: 0;
+		flex: 1 0 0;
+		overflow: hidden;
+		height: @themeNavigation__linkHeight;
+		line-height: @themeNavigation__linkHeight;
+		label {
+			height: @themeNavigation__linkHeight;
+			cursor: pointer;
+			margin: 0;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			&::after {
+				content: @themeNavigation__mobileHamburgerLabel;
+				padding-left: .25em;
 			}
 		}
 	}
+	.module-themeNavigation__mobileToggle:checked ~ .module-themeNavigation__burger::before {
+		content: "";
+		display: block;
+		position: fixed;
+		z-index: 30;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba( 0, 0, 0, .5 );
+	}
+	.module-themeNavigation__mobileToggle,
+	.module-themeNavigation__mobileClose {
+		display: none;
+	}
+	
+	.module-themeNavigation__mobileToggle:checked {
+		~ .module-themeNavigation__mobileClose {
+			display: block;
+			position: fixed;
+			color: @themeNavigation__mobileLinkColor;
+			z-index: 9000;
+			padding: .5rem;
+			font-size: @themeNavigation__mobileCloseButtonSize - 1rem;
+			cursor: pointer;
+			top: 0;
+			right: 0;
+			@media ( min-width: @themeNavigation__fullWidthDrawerBreakpoint ) {
+				left: calc( ~"@{themeNavigation__mobileMenuWidth} - @{themeNavigation__mobileCloseButtonSize}" );
+			}
+		}
+		~ ul {
+			height: 100vh;
+			width: @themeNavigation__mobileMenuWidth;
+			max-width: 100vw;
+			display: flex;
+			flex-direction: column;
+			z-index: 500;
+			overflow: scroll;
+			padding-top: @themeNavigation__mobileCloseButtonSize;
+			padding-bottom: 7rem;
+			background-color: @themeNavigation__mobileMenuBackgroundColor;
+			position: fixed;
+			top: 0;
+			left: 0;
+			.module-themeNavigation-dropdown a {
+				padding-left: 2rem;
+			}
+			@media ( max-width: @themeNavigation__fullWidthDrawerBreakpoint ) {
+				width: 100%;
+			}
+		}
+		& when ( @themeNavigation__mobileDrawerAlignment = right ) {
+			~ .module-themeNavigation__mobileClose {
+				left: auto;
+				right: 0;
+			}
+			~ ul {
+				left: auto;
+				right: 0;
+			}
+		}
+	}
+	.module-themeNavigation-topLevelLink {
+		height: @themeNavigation__linkHeight;
+		.module-themeNavigation__dropdownToggle {
+			display: none;
+		}
+		&, li {
+			float: none;
+			display: inline-block;
+			text-align: left;
+			a {
+				background-color: @themeNavigation__linkBackgroundColor;
+				font-weight: @themeNavigation__linkWeight;
+				padding: 0 @themeNavigation__linkHorizontalPadding;
+				margin-top: 0;
+				&:hover, &:focus {
+					text-decoration: none;
+				}
+			}
+			&.has-children > a {
+				padding-right: calc( ~"@{themeNavigation__linkHorizontalPadding} + 8px" )
+			}
+			&:hover  {
+				> a {
+					background-color: @themeNavigation__linkBackgroundColorHover;
+					color: @themeNavigation__linkColorHover;
+					border-color: @themeNavigation__borderTopColorHover @themeNavigation__borderRightColorHover @themeNavigation__borderBottomColorHover @themeNavigation__borderLeftColorHover;
+				}
+				.module-themeNavigation-arrow {
+					color: @themeNavigation__arrowColorHover;
+				}
+				.module-themeNavigation__caret {
+					.module-themeNavigation__transform( rotateX( 180deg ) );
+				}
+				.module-themeNavigation-dropdown {
+					display: block;
+				}
+			}
+			&.active, &:focus {
+				> a {
+					background-color: @themeNavigation__linkBackgroundColorActive;
+					color: @themeNavigation__linkColorActive;
+					border-color: @themeNavigation__borderTopColorActive @themeNavigation__borderRightColorActive @themeNavigation__borderBottomColorActive @themeNavigation__borderLeftColorActive;
+				}
+				.module-themeNavigation-arrow {
+					color: @themeNavigation__arrowColorActive;
+				}
+			}
+		}
+		& when ( @themeNavigation__dropdownAlignmentEdge = right ) {
+			.module-themeNavigation__alignChildDropdownToRightEdge();
+		}
+		&:last-child {
+			.module-themeNavigation__alignChildDropdownToRightEdge();
+		}
+		> a {
+			line-height: @themeNavigation__linkHeight - ( @themeNavigation__borderTopSize + @themeNavigation__borderBottomSize );
+			height: @themeNavigation__linkHeight;
+			display: inline-block;
+			color: @themeNavigation__linkColor;
+			border-style: solid;
+			border-width: @themeNavigation__borderTopSize @themeNavigation__borderRightSize @themeNavigation__borderBottomSize @themeNavigation__borderLeftSize;
+			border-color: @themeNavigation__borderTopColor @themeNavigation__borderRightColor @themeNavigation__borderBottomColor @themeNavigation__borderLeftColor;
+		}
+	}
+	
+	@{themeNavigation__mobileDrawerSelector} .module-themeNavigation-topLevelLink {
+		direction: ltr;
+		flex: 0 0 auto;
+		position: relative;
+		border-bottom: 1px solid @themeNavigation__mobileLinkBorderColor;
+		flex-wrap: wrap;
+		align-items: center;
+		height: auto;
+		&:first-child {
+			border-top: 1px solid @themeNavigation__mobileLinkBorderColor;
+		}
+		a {
+			display: block;
+			border: none;
+			order: -1;
+			color: @themeNavigation__mobileLinkColor;
+			height: @themeNavigation__mobileLinkHeight;
+			line-height: @themeNavigation__mobileLinkHeight;
+			max-width: calc( ~"100vw - @{themeNavigation__mobileArrowSize}" );
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			@media ( max-width: @themeNavigation__fullWidthDrawerBreakpoint ) {
+				flex: 0 1 100%;
+			}
+		}
+		&, li {
+			&.active, &:focus, &:hover, &.js-mobile-open {
+				> a {
+					background-color: @themeNavigation__mobileLinkBackgroundColorActive;
+					color: @themeNavigation__mobileLinkColorActive;
+				}
+				> .module-themeNavigation-arrow {
+					color: @themeNavigation__mobileArrowColorActive;
+				}
+			}
+		}
+		&:hover .module-themeNavigation-dropdown {
+			display: none;
+		}
+		.module-themeNavigation__dropdownToggle:checked {
+			~ .module-themeNavigation-arrow .module-themeNavigation__caret {
+				.module-themeNavigation__transform( rotateX( 180deg ) );
+			}
+			~ ul {
+				display: block;
+			}
+		}
+	}
+	
+	.module-themeNavigation__alignChildDropdownToRightEdge() {
+		/* direction: rtl;
+		text-align: left;
+		> * {
+			direction: ltr;
+		}
+		.module-themeNavigation-arrow {
+			right: calc( ~"-100% + @{themeNavigation__arrowPosition}" );
+		} */
+	}
+	.module-themeNavigation-dropdown {
+		background-color: @themeNavigation__dropdownBackgroundColor;
+		display: none;
+		position: absolute;
+		z-index: 9010;
+		padding-left: 0;
+		min-width: 10rem;
+		box-shadow: 0 2px 2px @themeNavigation__dropdownShadowColor;
+		white-space: nowrap;
+		li {
+			display: block;
+			min-height: @themeNavigation__linkHeight;
+			&:hover {
+				background-color: @themeNavigation__dropdownBackgroundColorHover;
+				> a {
+					color: @themeNavigation__dropdownLinkColorHover;
+				}
+			}
+			&.active, &:focus {
+				background-color: @themeNavigation__dropdownBackgroundColorActive;
+				> a {
+					color: @themeNavigation__dropdownLinkColorActive;
+				}
+			}
+		}
+		a {
+			display: block;
+			padding-left: 1rem;
+			line-height: @themeNavigation__dropdownLinkHeight;
+			white-space: nowrap;
+			color: @themeNavigation__dropdownLinkColor;
+		}
+	}
+	
+	@{themeNavigation__mobileDrawerSelector} .module-themeNavigation-dropdown {
+		position: relative;
+		flex: 0 0 100%;
+	}
+}
+
+&.navigation__open,
+.navigation__open {
+	&, body {
+		overflow: hidden;
+		perspective: unset; // parallax
+	}
+}
+
+// Redefine @themeNavigation__* variables below. It's recommended that you redefine these variables
+// instead of applying your own CSS to the navigation system whenever possible.
+
+@themeNavigation__black: @black;
+@themeNavigation__white: @white;
+@themeNavigation__backgroundColor: @backgroundColor;
+@themeNavigation__alignment: center; // Referencing the variable this way removes quotes.
+@themeNavigation__linkHeight: 3rem;
+@themeNavigation__linkBackgroundColorActive: mix( @themeNavigation__backgroundColor, contrast( @themeNavigation__backgroundColor, @black, @white ), 90% );
+@themeNavigation__mobileHamburgerAlignment: right;
+
+.navigation {
+	border-bottom: 5px solid @accentColor;
 }

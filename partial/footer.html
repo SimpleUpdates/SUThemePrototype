@@ -1,12 +1,39 @@
-<footer>
-	<div class="row">
-		<div class="col-sm-12">
-			{% include "partial/contactInfo.html" %}
+<div class="footerWrapper">
+	<div class="container">
+		<div class="contentFooter row">
+			{% set siteName	= ( siteName is defined ) ? siteName : su.site.name %}
+			{% set address	= ( address is defined )  ? address  : su.site.address %}
+			{% set city	    = ( city is defined )     ? city     : su.site.city %}
+			{% set state	= ( state is defined )    ? state    : su.site.state %}
+			{% set zip	    = ( zip is defined )      ? zip      : su.site.zip %}
+			{% set country	= ( country is defined )  ? country  : su.site.country %}
+			{% set phone	= ( phone is defined )    ? phone    : su.site.phone %}
+			{% set email	= ( email is defined )    ? email    : su.site.email %}
+
+			<div class="contentFooter no-print">
+				<div class="address-box no-print col-xs-6">
+					<strong>
+						<span class="sitename">{{ siteName|e|replace( {'®': '<sup><small>&reg;</small></sup>'} )|raw }}</span>
+					</strong>
+					{% if address or city or state or zip or phone %}<br />{% endif %}
+					{% if address %}{{ address }}<br />{% endif %}
+					{% if city %}{{ city }}, {% endif %}{% if state %}{{ state }} {{ zip }}<br />{% endif %}
+					{% if phone %}<a class="phone" href="tel:{{ phone }}">{{ phone }}</a>{% endif %}
+				</div>
+				<div class="social-search col-xs-6">
+					{% include "partial/search.html" %}
+					{% include "partial/socialIcons.html" %}
+				</div>
+			</div>
+
+		</div>
+		<div class="pageFooter row">
+			<footer class="pageFooter">
+				<div class="row text-center no-print">
+					{{ su.footer }}
+				</div>
+			</footer>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-12 su-footer">
-			{{ su.footer }}
-		</div>
-	</div>
-</footer>
+</div>
+</div>

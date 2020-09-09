@@ -1,0 +1,129 @@
+.carousel {
+	.slick-arrow {
+		font-size: @carousel__arrowFontSize;
+		opacity: @carousel__arrowOpacity;
+		display: block;
+		width: 10rem;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		z-index: 50;
+		color: white;
+		filter: drop-shadow( 0 0 1rem rgba( 0,0,0,.7 ));
+		background-color: transparent;
+		border: none;
+		transition: opacity 400ms;
+		&.slick-prev {
+			left: 0;
+			text-align: left;
+			padding-left: @carousel__arrowOuterPadding;
+		}
+		&.slick-next {
+			right: 0;
+			text-align: right;
+			padding-right: @carousel__arrowOuterPadding;
+		}
+		&:hover {
+			opacity: @carousel__arrowOpacityHover;
+		}
+		&:active {
+			opacity: @carousel__arrowOpacityActive;
+		}
+		&:focus {
+			opacity: @carousel__arrowOpacityFocus;
+			outline: none;
+		}
+	}
+	.slick-dots {
+		@local__marginBottom: max( 0, ( @carousel__dotTouchTargetSize - @carousel__dotHeight ) / 3 );
+	
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		padding-left: 0;
+		padding-bottom: 0;
+		margin-bottom: @local__marginBottom;
+		z-index: 100;
+		display: flex;
+		flex-wrap: wrap-reverse;
+		& when ( @carousel__dotAlign = left ) {
+			justify-content: flex-start;
+		}
+		& when ( @carousel__dotAlign = center ) {
+			justify-content: center;
+		}
+		& when ( @carousel__dotAlign = right ) {
+			justify-content: flex-end;
+		}
+		li {
+			display: inline-block;
+			flex: 1 0 @carousel__dotWidth;
+			max-width: max( @carousel__dotTouchTargetSize, @carousel__dotWidth );
+			min-height: @carousel__dotTouchTargetSize;
+		}
+		button {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 0;
+			padding: 0;
+			margin: 0;
+			background-color: transparent;
+			border: none;
+			&::after {
+				content: "";
+				display: block;
+				width: @carousel__dotWidth;
+				height: @carousel__dotHeight;
+				background-color: @carousel__dotBackgroundColor;
+				border: @carousel__dotBorderWidth solid @carousel__dotBorderColor;
+				box-shadow: @carousel__dotShadow;
+				border-radius: 100%;
+			}
+		}
+		.slick-active button::after {
+			background-color: @carousel__dotBackgroundColorActive;
+			border: @carousel__dotBorderWidth solid @carousel__dotBorderColorActive;
+			box-shadow: @carousel__dotShadowActive;
+		}
+	}
+	& {
+		transition: background-color 1000ms;
+		> * {
+			transition: opacity 400ms;
+			opacity: 1;
+		}
+		&.preload {
+			height: @carousel__slideMinHeight;
+			background-color: @carousel__preloadColor;
+			> * {
+				opacity: 0;
+			}
+		}
+	}
+	.slick-slide {
+		position: relative;
+		min-height: @carousel__slideMinHeight;
+	}
+	
+	&.carousel__kenBurns {
+		.slick-slide @{carousel__kenBurnsSlideRelativeSelector} {
+			transition: opacity 3000ms, transform @carousel__kenBurnsTimingFunction @carousel__kenBurnsSpeed !important;
+			transform: scale( @carousel__kenBurnsScale );
+		}
+		.slick-slide.slick-active @{carousel__kenBurnsSlideRelativeSelector} {
+			transform: scale( @carousel__kenBurnsScaleActive );
+		}
+	}
+}
+
+@carousel__slideMinHeight: 0;
+@carousel__kenBurnsSlideRelativeSelector: ~'img';
+
+.carousel {
+	.slick-dots {
+		margin-bottom: 18px;
+	}
+}

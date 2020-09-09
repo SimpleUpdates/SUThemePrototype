@@ -1,0 +1,60 @@
+{% set image = slide.image %}
+{% set aspectRatio = 1500/420 %}
+{% set minWidth = 500 %}
+{% set maxWidth = 1500  %}
+{% set alt = slide.caption %}
+{% set classes = "custom" %}
+
+<{{ slide.url ? "a" : "div" }} class="slide" {% if slide.url %}href="{{ slide.url }}" target="{{ slide.urlTarget }}" title="{{ slide.caption }}"{% endif %}>
+	{% set aspectRatio = ( aspectRatio is defined ) ? aspectRatio : 1 %}
+	{% set minWidth = ( minWidth is defined ) ? minWidth : 500 %}
+	{% set maxWidth = ( maxWidth is defined ) ? maxWidth : 3000 %}
+	
+	{% set stepSize = 250 %}
+	{% set steps = ( ( maxWidth - minWidth ) / stepSize )|round( 1, "ceil" ) %}
+	
+	{% set sizes = [] %}
+	{% for i in 0..steps %}
+		{% set w = maxWidth - ( i * stepSize ) %}
+		{% set h = w / aspectRatio %}
+		{% set sizes = sizes|merge( [ [ w|round, h|round ] ] ) %}
+	{% endfor %}
+	
+	{% set srcsets = [] %}
+	{% for size in sizes %}
+		{% set url = image.ratio( size[0], size[1] ) %}
+		{% set srcsets = srcsets|merge( [ "%s %dw"|format( url, size[0] ) ] ) %}
+	{% endfor %}
+	
+	{% set srcset = srcsets|join( ", " ) %}
+	
+	{% set srcSize = sizes|last %}
+	{% set src = image.fill( srcSize[0], srcSize[1] ) %}
+	
+	{# PARALLAX #}
+	
+	{% set parallaxSpeed = ( parallaxSpeed is defined ) ? parallaxSpeed : 10 %}
+	{% set isFixed = parallaxSpeed == 0 %}
+	{% set translateZ = isFixed ? "-1000px" : ( - ( 11 - parallaxSpeed ) ) ~ "px" %}
+	{% set scale = isFixed ? 1001 : ( 11 - parallaxSpeed ) + 1 %}
+	{% set parallaxClass = "responsiveImage__parallax" %}
+	{% set classes = ( parallax ) ? "#{classes} #{parallaxClass}" : classes %}
+	
+	<div class="responsiveImage {{ classes }}"
+	style="--x: {{ srcSize[0] }}; --y: {{ srcSize[1] }}; --focalX: {{ image.focalPoint.x~"%" }}; --focalY: {{ image.focalPoint.y~"%" }};">
+		<img src="{{ src }}" srcset="{{ srcset }}" alt="{{ alt }}"{% if parallax %} style="--translateZ: {{ translateZ }}; --scale: {{ scale }}"{% endif %} />
+	</div>
+	
+	<div class="overlay">
+	
+		{% if slide.caption or slide.description %}
+			<div class="slide__caption container {{ slide.alignment }}">
+				<div class="slide__content">
+					{% if slide.caption %}<h4>{{ slide.caption }}</h4>{% endif %}
+					{% if slide.description %}<p>{{ slide.description }}</p>{% endif %}
+				</div>
+			</div>
+		{% endif %}
+	
+	</{{ slide.url ? "a" : "div" }}>
+</div>

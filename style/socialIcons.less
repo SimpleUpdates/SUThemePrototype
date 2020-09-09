@@ -1,13 +1,64 @@
-.icons {
-	margin-bottom: 1rem;
-	margin-top: 1rem;
-	text-align: center;
-	@media ( max-width: @screenXsMax ) {
-		margin-top: 1rem;
-		text-align: left;
+
+.socialLinks {
+	text-align: @socialLinks__alignment;
+	margin: 0;
+	padding: 0;
+	li {
+		display: inline-flex;
+		a {
+			width: @socialLinks__touchTargetSize;
+			height: @socialLinks__touchTargetSize;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			&::before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: @socialLinks__innerMargin;
+				left: @socialLinks__innerMargin;
+				bottom: @socialLinks__innerMargin;
+				right: @socialLinks__innerMargin;
+				border-radius: @socialLinks__iconBackgroundRadius;
+				background-color: @socialLinks__iconBackgroundColor;
+			}
+			svg {
+				height: @socialLinks__iconSize;
+				width: @socialLinks__iconSize;
+				color: @socialLinks__iconColor;
+				position: relative;
+				z-index: 10;
+
+			}
+			svg, &::before {
+				transform: scale( 1 );
+				transition:
+					transform @socialLinks__hoverSpeed,
+					color @socialLinks__hoverSpeed,
+					background-color @socialLinks__hoverSpeed;
+			}
+			&:hover svg, &:hover::before {
+				transform: scale( @socialLinks__hoverScale );
+				color: @socialLinks__iconColorHover;
+			}
+			&:hover::before {
+				background-color: @socialLinks__iconBackgroundColorHover;
+			}
+		}
 	}
-	a {
-		padding: .5rem;
-		display: inline-block;
-	}
+}
+
+@socialLinks__alignment: right;
+@socialLinks__iconSize: 16px;
+@socialLinks__iconColor: @white;
+@socialLinks__iconColorHover: @grayBleached;
+@socialLinks__iconBackgroundSize: 28px;
+@socialLinks__iconBackgroundColor: @grayDark;
+@socialLinks__hoverScale: 1;
+
+.socialIcons {
+	clear: both;
+	margin-right: -@socialLinks__innerMargin;
+	padding-top: 5px;
 }

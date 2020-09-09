@@ -1,0 +1,19 @@
+.contentOptions {
+	margin-bottom: 1em;
+	h2.page-title {
+		font-size: 2.5em;
+	}
+	.contentOptions__byline,
+	.contentOptions__published,
+	.contentOptions__updated {
+		opacity: .7;
+	}
+	.contentOptions__byline {
+		display: block;
+	}
+	.contentOptions__published + .contentOptions__updated:before {
+		content: "|";
+		margin-left: .5em;
+		margin-right: .5em;
+	}
+}

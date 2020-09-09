@@ -1,0 +1,207 @@
+// ------ General Variables ------
+@screenXsMin: 480px;
+@screenSmMin: 768px;
+@screenMdMin: 992px;
+@screenLgMin: 1200px;
+
+@screenXsMax: ( @screenSmMin - 1 );
+@screenSmMax: ( @screenMdMin - 1 );
+@screenMdMax: ( @screenLgMin - 1 );
+
+@containerWidthXs: auto;
+@containerWidthSm: 750px;
+@containerWidthMd: 970px;
+@containerWidthLg: 1170px;
+
+// ------ Button variables ------
+  
+@button__verticalPadding: .25em;
+@button__horizontalPadding: 1em;
+
+@button__fontSize: 1em;
+@button__fontWeight: 400;
+
+@button__transitionSpeed: 300ms;
+
+// Colors
+
+@button__backgroundColor: #477BB2;
+@button__backgroundColorHover: contrast( @button__backgroundColor, darken( @button__backgroundColor, 10% ), lighten( @button__backgroundColor, 10% ) );
+@button__textColor: contrast( @button__backgroundColor );
+@button__textColorHover: contrast( @button__backgroundColorHover );
+
+@button__bleachedBackgroundColor: white;
+@button__bleachedBackgroundColorHover: contrast( @button__bleachedBackgroundColor, darken( @button__bleachedBackgroundColor, 10% ), lighten( @button__bleachedBackgroundColor, 10% ) );
+@button__bleachedTextColor: contrast( @button__bleachedBackgroundColor, darken( @button__bleachedBackgroundColor, 85% ), lighten( @button__bleachedBackgroundColor, 85% ) );
+@button__bleachedTextColorHover: contrast( @button__bleachedBackgroundColorHover, black, white );
+
+@button__darkBackgroundColor: #2c2c2c;
+@button__darkBackgroundColorHover: contrast( @button__darkBackgroundColor, darken( @button__darkBackgroundColor, 10% ), lighten( @button__darkBackgroundColor, 10% ) );
+@button__darkTextColor: contrast( @button__darkBackgroundColor, darken( @button__darkBackgroundColor, 85% ), lighten( @button__darkBackgroundColor, 85% ) );
+@button__darkTextColorHover: contrast( @button__darkBackgroundColorHover, black, white );
+
+// Borders
+
+@button__borderRadius: 3px;
+@button__borderSize: 1px;
+@button__borderContrast: 10%;
+@button__borderColor: darken( @button__backgroundColor, @button__borderContrast );
+@button__borderColorHover: darken( @button__backgroundColorHover, @button__borderContrast );
+
+@button__bleachedBorderColor: darken( @button__bleachedBackgroundColor, @button__borderContrast );
+@button__bleachedBorderColorHover: darken( @button__bleachedBackgroundColorHover, @button__borderContrast );
+
+@button__darkBorderColor: darken( @button__darkBackgroundColor, @button__borderContrast );
+@button__darkBorderColorHover: darken( @button__darkBackgroundColorHover, @button__borderContrast );
+
+@button__coreBorderSize: 1px;
+
+
+// ------ Breadcrumb Variables ------
+@breadcrumbs__textColor: black;
+@breadcrumbs__arrowColor: @breadcrumbs__textColor;
+@breadcrumbs__arrowSize: 8px;
+
+
+// ------ Navigation Variables ------
+// This file should be imported in a theme separately from themeNavigation.less and at the top level outside any
+// selectors in order to make it possible for variables to be overridden in Custom CSS.
+
+/* Base */
+
+@themeNavigation__black: black;
+@themeNavigation__white: white;
+@themeNavigation__backgroundColor: rgba( 255,255,255,0 );
+@themeNavigation__linkBackgroundColor: transparent;
+@themeNavigation__linkBackgroundColorActive: contrast( @themeNavigation__backgroundColor, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__linkBackgroundColorHover: @themeNavigation__linkBackgroundColorActive;
+@themeNavigation__linkColor: contrast( @themeNavigation__backgroundColor, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__linkColorActive: contrast( @themeNavigation__linkBackgroundColorActive, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__linkColorHover: contrast( @themeNavigation__linkBackgroundColorHover, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__arrowColor: @themeNavigation__linkColor;
+@themeNavigation__arrowColorActive: @themeNavigation__linkColorActive;
+@themeNavigation__arrowColorHover: @themeNavigation__linkColorHover;
+@themeNavigation__linkHeight: 2.5rem;
+@themeNavigation__linkWeight: normal;
+@themeNavigation__linkHorizontalPadding: 1rem;
+@themeNavigation__fontSize: 1em;
+@themeNavigation__alignment: left;
+
+/* Borders */
+
+@themeNavigation__borderTopSize: 0;
+@themeNavigation__borderRightSize: 0;
+@themeNavigation__borderBottomSize: 0;
+@themeNavigation__borderLeftSize: 0;
+
+@themeNavigation__borderTopColor: transparent;
+@themeNavigation__borderRightColor: transparent;
+@themeNavigation__borderBottomColor: transparent;
+@themeNavigation__borderLeftColor: transparent;
+
+@themeNavigation__borderTopColorActive: @themeNavigation__borderTopColor;
+@themeNavigation__borderRightColorActive: @themeNavigation__borderRightColor;
+@themeNavigation__borderBottomColorActive: @themeNavigation__borderBottomColor;
+@themeNavigation__borderLeftColorActive: @themeNavigation__borderLeftColor;
+
+@themeNavigation__borderTopColorHover: @themeNavigation__borderTopColorActive;
+@themeNavigation__borderRightColorHover: @themeNavigation__borderRightColorActive;
+@themeNavigation__borderBottomColorHover: @themeNavigation__borderBottomColorActive;
+@themeNavigation__borderLeftColorHover: @themeNavigation__borderLeftColorActive;
+
+/* Drop Down */
+
+@themeNavigation__dropdownBackgroundColor: @themeNavigation__white;
+@themeNavigation__dropdownBackgroundColorActive: @themeNavigation__linkBackgroundColorActive;
+@themeNavigation__dropdownBackgroundColorHover: @themeNavigation__linkBackgroundColorHover;
+@themeNavigation__dropdownLinkColor: contrast( @themeNavigation__dropdownBackgroundColor, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__dropdownLinkColorActive: contrast( @themeNavigation__dropdownBackgroundColorActive, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__dropdownLinkColorHover: contrast( @themeNavigation__dropdownBackgroundColorHover, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__dropdownShadowColor: rgba( 0,0,0,.1 );
+@themeNavigation__dropdownLinkHeight: @themeNavigation__linkHeight;
+@themeNavigation__dropdownAlignmentEdge: @themeNavigation__alignment;
+
+/* Mobile */
+
+@themeNavigation__mobileBreakpoint: auto;
+@themeNavigation__fullWidthDrawerBreakpoint: 480px;
+@themeNavigation__mobileHamburgerAlignment: right;
+@themeNavigation__mobileHamburgerLabel: "Menu";
+@themeNavigation__mobileMenuBackgroundColor: @themeNavigation__white;
+@themeNavigation__mobileLinkBackgroundColorActive: @themeNavigation__dropdownBackgroundColorHover;
+@themeNavigation__mobileLinkColor: contrast( @themeNavigation__mobileMenuBackgroundColor, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__mobileLinkColorActive: contrast( @themeNavigation__mobileLinkBackgroundColorActive, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__mobileMenuWidth: 300px;
+@themeNavigation__mobileLinkHeight: 3rem;
+@themeNavigation__mobileArrowSize: @themeNavigation__mobileLinkHeight;
+@themeNavigation__mobileArrowColor: @themeNavigation__mobileLinkColor;
+@themeNavigation__mobileArrowColorActive: @themeNavigation__mobileLinkColorActive;
+@themeNavigation__mobileCloseButtonSize: @themeNavigation__mobileArrowSize;
+@themeNavigation__mobileLinkBorderColor: fade( @themeNavigation__mobileLinkColor, 20% );
+@themeNavigation__mobileDrawerAlignment: @themeNavigation__mobileHamburgerAlignment;
+
+
+// ------ Related Info Variables ------
+@relatedInfo__pillBackgroundColor: rgba( 0,0,0,.05 );
+@relatedInfo__pillBackgroundColorHover: rgba( 0,0,0,.5 );
+@relatedInfo__pillTextColor: rgba( 0,0,0,.7 );
+@relatedInfo__pillTextColorHover: rgba( 255,255,255,1 );
+
+
+// ------ Search Variables ------
+  
+@search__backgroundColor: #c5c5c5;
+@search__textColor: contrast( @search__backgroundColor );
+@search__iconColor: @search__textColor;
+@search__placeholderColor: fade( @search__textColor, 40% );
+@search__borderRadius: 4px;
+@search__float: none;
+
+
+// ------ Social Links Variables ------
+// Variables intended to be changed
+@socialLinks__alignment: left;
+@socialLinks__touchTargetSize: 48px;
+@socialLinks__iconSize: 18px;
+@socialLinks__iconColor: white;
+@socialLinks__iconColorHover: @socialLinks__iconColor;
+@socialLinks__iconBackgroundSize: 35px;
+@socialLinks__iconBackgroundColor: black;
+@socialLinks__iconBackgroundColorHover: @socialLinks__iconBackgroundColor;
+@socialLinks__iconBackgroundRadius: 50%;
+@socialLinks__hoverScale: .9;
+@socialLinks__hoverSpeed: .2s;
+
+// Variables intended to be referenced but not changed
+@socialLinks__innerMargin: ( @socialLinks__touchTargetSize - @socialLinks__iconBackgroundSize ) / 2;
+
+
+// ------ Carousel Variables ------
+@carousel__slideMinHeight: 0;
+@carousel__preloadColor: transparent;
+
+@carousel__arrowFontSize: 3.5rem;
+@carousel__arrowOuterPadding: .7vw;
+@carousel__arrowOpacity: .5;
+@carousel__arrowOpacityHover: 1;
+@carousel__arrowOpacityActive: @carousel__arrowOpacityHover;
+@carousel__arrowOpacityFocus: @carousel__arrowOpacityHover;
+
+@carousel__dotSize: 12px;
+@carousel__dotWidth: @carousel__dotSize;
+@carousel__dotHeight: @carousel__dotSize;
+@carousel__dotAlign: center;
+@carousel__dotBorderColor: white;
+@carousel__dotBorderColorActive: @carousel__dotBorderColor;
+@carousel__dotBackgroundColor: transparent;
+@carousel__dotBackgroundColorActive: @carousel__dotBorderColor;
+@carousel__dotBorderWidth: 1px;
+@carousel__dotShadow: 0 0 1rem rgba( 0,0,0,.3 ), inset 0 0 1rem rgba( 0,0,0,.1 );
+@carousel__dotShadowActive: 0 0 1rem rgba( 0,0,0,.3 );
+@carousel__dotTouchTargetSize: 40px;
+
+@carousel__kenBurnsSlideRelativeSelector: ~'';
+@carousel__kenBurnsTimingFunction: ease;
+@carousel__kenBurnsSpeed: 9s;
+@carousel__kenBurnsScale: 1.2;
+@carousel__kenBurnsScaleActive: 1;

@@ -1,0 +1,19 @@
+@media print {
+	.fc-left, // calendar controls
+	.fc-right, // calendar controls
+	.content-breadcrumbs,
+	footer {
+		display: none;
+	}
+	.article-headline-wrapper {
+		height: auto;
+	}
+	.main-content {
+		padding: 0;
+	}
+	[data-sr-id] { // override ScrollReveal image effects
+		opacity: 1 !important;
+		visibility: visible !important;
+		transform: none !important;
+	}
+}

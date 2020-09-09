@@ -1,0 +1,9 @@
+{% set breadcrumbs = ( breadcrumbs is defined ) ? breadcrumbs : su.page.breadcrumbs %}
+
+<div class="content-breadcrumbs">
+	{% if breadcrumbs|length > 1 %}
+		<ul class="content-breadcrumbs no-print">
+			{% for crumb in breadcrumbs %}<li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>{% endfor %}
+		</ul>
+	{% endif %}
+</div>

@@ -1,27 +1,38 @@
 .search {
-	background-color: @white;
+	@textColor: contrast( @headerBlockColor, @white, @black );
+	@inputBackgroundColor: fade( @textColor, 20% );
+	@buttonColor: fade( @textColor, 80% );
+	@placeholderTextColor: @buttonColor;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 2rem;
+	background-color: @inputBackgroundColor;
 	position: relative;
-	color: @black;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-	border: 1px solid @primaryColor;
+	color: @textColor;
+	max-width: 12rem;
+	float: right;
+	margin-top: .3rem;
+	margin-bottom: .3rem;
 	> * {
 		height: 2rem;
-		border: none;
+		border: 0;
 		background-color: transparent;
 	}
 	input {
 		width: 100%;
 		padding: 0 2rem 0 .75rem;
+		.placeholder-color( @placeholderTextColor );
 	}
 	button {
-		color: @black;
-		width: 2rem;
 		position: absolute;
-		right: 0;
+		width: 2rem;
 		top: 0;
+		right: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		color: @buttonColor;
 	}
 }
