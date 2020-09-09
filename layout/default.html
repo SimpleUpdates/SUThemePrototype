@@ -9,43 +9,41 @@
 	<div id="site-bg" class="row-offcanvas row-offcanvas-right">
 
 		{% include "partial/branding.html" %}
-		
+
 		{% include "partial/navigation.html" %}
 
 		{% block hero endblock %}
-		
+
 		{% block headerTitle endblock %}
-		
-		{# {% block imageButtons endblock %} #}
-		
+
 		<section>
 			<div class="container">
 				<div class="content-area">
 					<div class="main-content">
-		
+
 						{% block imageButtons endblock %}
-						
+
 						{% block breadcrumbsShare %}
 							<div class="content-breadcrumbsShare">
 								{% include "partial/breadcrumbs.html" %}
 								{% include "partial/shareMenu.html" %}
 							</div>
 						{% endblock %}
-						
+
 						{% include "partial/contentOptions.html" %}
-						
+
 						{% block pageContent %}{{ su.content }}{% endblock %}
-		
+
 					</div>
 				</div>
 			</div>
 		</section>
 
 		{% include "partial/footer.html" %}
-	
+
 	</div>
-	
+
 	{% include "partial/imageEffects.html" %}
-	
+
 </body>
 {% endblock %}
