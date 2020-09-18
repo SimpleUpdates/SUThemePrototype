@@ -1,36 +1,61 @@
-<div class="navbar-header">
-	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-		<span class="sr-only">Toggle navigation</span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	</button>
-</div>
-<nav class="site-nav">
+{% set sitemap = ( sitemap is defined ) ? sitemap : su.site.sitemap %}
+
+<div class="navigation">
 	<div class="container">
-		<div class="navbar-collapse collapse" style="height: 1px;">
-			<ul class="nav navbar-nav">
-				{% for page in su.site.sitemap %}
-					{% set hasChildren = page.hasChildren and page.hasParent %}
-					<li class="{% if page.current %}active{% endif %} {% if hasChildren %}has-children{% endif %}">
-						<a href="{{ page.url }}" target="{{ page.target }}">{{ page.navigationLabel }}</a>
-						{% if hasChildren %}
-							<input type="checkbox" class="toggle" />
-							<div class="arrow"><span class="caret"></span></div>
-							<ul>
-								{% for child in page.children %}
-									<li{% if child.current %} class="active"{% endif %}><a href="{{ child.url }}">{{ child.navigationLabel }}</a></li>
-								{% endfor %}
-							</ul>
-						{% endif %}
-					</li>
-				{% endfor %}
-			</ul>
-		</div><!--/.nav-collapse -->
+		{% set sitemap	= ( sitemap is defined ) ? sitemap : su.site.sitemap %}
+		
+		<div class="module-themeNavigation">
+			{% if before %}
+				<div class="module-themeNavigation__before">
+					{{ before|raw }}
+				</div>
+			{% endif %}
+			<div class="module-themeNavigation__nav">
+				<input class="module-themeNavigation__mobileToggle" type="checkbox" id="module-themeNavigation__mobileToggle">
+				<div class="module-themeNavigation__burger">
+					<label for="module-themeNavigation__mobileToggle">{{ getIcon( "fa-bars" ) }}</label>
+				</div>
+				<label class="module-themeNavigation__mobileClose" for="module-themeNavigation__mobileToggle">{{ getIcon( "fa-times" ) }}</label>
+				<ul>
+					{% spaceless %}
+						{% for page in sitemap %}
+							{% set hasChildren = page.hasChildren and page.hasParent %}
+							
+							{% if page.navigationLabel %}
+								<li class="module-themeNavigation-topLevelLink {% if page.current %}active{% endif %} {% if hasChildren %}has-children{% endif %}">
+									<a href="{{ page.url }}" target="{{ page.target }}">{{ page.navigationLabel }}</a>
+									{% if hasChildren %}
+										<input type="checkbox" class="module-themeNavigation__dropdownToggle" id="module-themeNavigation__dropdownToggle{{ loop.index }}" />
+										<label class="module-themeNavigation-arrow" for="module-themeNavigation__dropdownToggle{{ loop.index }}">
+											<span class="module-themeNavigation__caret"></span>
+										</label>
+										<ul class="module-themeNavigation-dropdown">
+											{% for child in page.children %}
+												<li{% if child.current %} class="active"{% endif %}>
+													<a href="{{ child.url }}" target="{{ child.target }}">{{ child.navigationLabel }}</a>
+												</li>
+											{% endfor %}
+										</ul>
+									{% endif %}
+								</li>
+							{% endif %}
+						{% endfor %}
+					{% endspaceless %}
+				</ul>
+			</div>
+			{% if after %}
+				<div class="module-themeNavigation__after">
+					{{ after|raw }}
+				</div>
+			{% endif %}
+		</div>
+		<script>
+			jQuery( '.module-themeNavigation__dropdownToggle' ).click(function() {
+				jQuery( this ).parent().toggleClass( 'js-mobile-open' );
+			});
+			jQuery( "#module-themeNavigation__mobileToggle" ).change(function() {
+				jQuery( "html" ).toggleClass( "navigation__open", this.checked );
+			});
+		</script>
 	</div>
-</nav>
-<script>
-	jQuery('.toggle').click(function() {
-		jQuery(this).parent().toggleClass('js-open');
-	});
-</script>
+</div>

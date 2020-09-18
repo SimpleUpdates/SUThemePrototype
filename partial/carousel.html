@@ -1,0 +1,111 @@
+{% set collectionIdentifier = "customCarousel" %}
+{% set slides = su.collection( collectionIdentifier )
+	.activationDate( "now"|date( 'Y-m-d' ), "<=" )
+	.deactivationDate( "now"|date( 'Y-m-d' ), ">" ).or().deactivationDate( "", "=" )
+	.find() %}
+
+{% set transitionSpeed = su.theme.config( "carouselTransitionSpeed" )|default( 2 ) * 1000 %}
+{% set autoplaySpeed = su.theme.config( "carouselSlideDuration" )|default( 9 ) * 1000 %}
+{% set transitionEffect = su.theme.config( "carouselTransitionEffect" )|default( "Fade" ) %}
+{% set slidePartial = "partial/slide.html" %}
+{% set flexHeight = true %}
+
+<div class="carousel">
+	{% set carouselId = "slick" ~ random() %}
+	{% set kenBurnsClass = ( transitionEffect == "Fade & Zoom" ) ? "carousel__kenBurns" : "" %}
+	{% set carouselClasses = "carousel no-print preload #{kenBurnsClass}" %}
+	
+	<link rel="stylesheet" type="text/css" href="{{ su.theme.asset( "../script/slick/slick.css" ) }}"/>
+	
+	<div id="{{ carouselId }}" class="{{ carouselClasses }}"{% if collectionIdentifier %} {{ su.editable.collection( collectionIdentifier ) }}{% endif %}>
+		{% for slide in slides %}
+			{% include slidePartial with { slide: slide } only %}
+		{% endfor %}
+	</div>
+	
+	{% if slides|length > 0 %}
+		{% set nextLabel = nextLabel|default( getIcon( "fa-chevron-right" ) )|raw %}
+		{% set prevLabel = prevLabel|default( getIcon( "fa-chevron-left" ) )|raw %}
+	
+		{% set nextArrow = '<button type="button" class="slick-next" aria-label="Next slide">'~nextLabel~'</button>' %}
+		{% set prevArrow = '<button type="button" class="slick-prev" aria-label="Previous slide">'~prevLabel~'</button>' %}
+	
+		{% set dots = ( slides|length == 1 or ( dots is defined and dots == false ) ) ? "false" : "true" %}
+		{% set arrows = ( arrows is defined ) ? ( arrows ? "true" : "false" ) : "true" %}
+		{% set slideVertical = ( slideVertical is defined ) ? ( slideVertical ? "true" : "false" ) : "false" %}
+		{% set pauseOnHover = ( pauseOnHover is defined ) ? ( pauseOnHover ? "true" : "false" ) : "true" %}
+		{% set pauseOnFocus = ( pauseOnFocus is defined ) ? ( pauseOnFocus ? "true" : "false" ) : "true" %}
+	
+		<script type="text/javascript" src="{{ su.theme.asset( "../script/slick/slick.min.js" ) }}"></script>
+		<script>
+			jQuery( document ).ready( function() {
+				var carousel = jQuery( '#{{ carouselId }}' );
+	
+				carousel.on( 'init', function( slick ) {
+					carousel.removeClass( 'preload' );
+	
+					{% if flexHeight %}
+						var slides = carousel.find( ".slick-slide" );
+	
+						function debounce( func, wait, immediate ) {
+							var timeout;
+							return function() {
+								var context = this, args = arguments;
+								var later = function() {
+									timeout = null;
+									if ( !immediate ) func.apply( context, args );
+								};
+								var callNow = immediate && !timeout;
+								clearTimeout( timeout );
+								timeout = setTimeout( later, wait );
+								if ( callNow ) func.apply( context, args );
+							};
+						}
+	
+						var setSlideHeight = function() {
+							slides.css( "height", "" );
+							var maxHeight = carousel.height();
+							slides.css( "height", maxHeight + "px" )
+						};
+	
+						jQuery( window ).resize( debounce( setSlideHeight, 250 ) );
+	
+						setSlideHeight();
+					{% endif %}
+				});
+	
+				carousel.slick({
+					waitForAnimate: false,
+					autoplay: true,
+					dots: {{ dots }},
+					arrows: {{ arrows }},
+					vertical: {{ slideVertical }},
+					pauseOnHover: {{ pauseOnHover }},
+					pauseOnFocus: {{ pauseOnFocus }},
+					nextArrow: '{{ nextArrow|raw }}',
+					prevArrow: '{{ prevArrow|raw }}',
+					fade: {{ ( transitionEffect starts with "Fade" )  ? "true" : "false" }},
+					speed: {{ transitionSpeed }},
+					autoplaySpeed: {{ autoplaySpeed }},
+					{% if appendArrows %}appendArrows: '{{ appendArrows }}'{% endif %}
+				});
+	
+				{% if appendArrows %}
+					// https://github.com/kenwheeler/slick/issues/3657
+					carousel.find( '.slick-prev' ).on( 'click', function(){
+						carousel.slick( "slickPrev" );
+					});
+					carousel.find( '.slick-next' ).on( 'click', function(){
+						carousel.slick( "slickNext" );
+					});
+				{% endif %}
+			});
+		</script>
+	{% else %}
+		<script>
+			jQuery( document ).ready( function() {
+				jQuery( '#{{ carouselId }}' ).removeClass( 'preload' );
+			});
+		</script>
+	{% endif %}
+</div>

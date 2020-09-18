@@ -1,0 +1,32 @@
+.content-area {
+	width: 100%;
+	position: relative;
+}
+.main-content {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 1.5em;
+	p .button, a.button, .button a {
+		text-decoration: none;
+		padding: .32em 1.15em;
+		background-color: @accentColorDim;
+		color: @white;
+		border: 1px solid @accentColor;
+		border-radius: 3px;
+		&:hover, &:focus {
+			background-color: @accentColorDark;
+			//color: @white;
+		}
+	}
+}
+.content-breadcrumbsShare {
+	.content-breadcrumbs {
+		float: left;
+	}
+	&:after { // clearfix
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+

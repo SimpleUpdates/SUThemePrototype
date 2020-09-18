@@ -1,0 +1,93 @@
+// ------ Aspect Ratio ------
+.utility-aspectRatio( @x; @y ) {
+	display: block;
+	max-width: 100%;
+	position: relative;
+	&::before {
+		content: '';
+		display: block;
+		padding-top: calc( ~"@{y} / @{x} * 100%" );
+	}
+	> * {
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
+// Modifying the z-index of the image component will break parallax.
+.responsiveImage {
+	height: 100%;
+	.utility-aspectRatio( var( --x ), var( --y ) );
+	img {
+		object-fit: cover;
+		object-position: var( --focalX ) var( --focalY );
+	}
+	&.responsiveImage__parallax {
+		overflow: hidden;
+		img {
+			top: calc( ~"( 50vh - 50% ) * -1" );
+			height: 100vh;
+			transform: translateZ( var( --translateZ ) ) scale( var( --scale ) );
+		}
+	}
+}
+
+
+// ------ Responsive Background Image ------
+.utility-responsiveBackgroundImage(
+	@image;
+	@percentWidth: 1;
+	@maxWidth: 2000px;
+	@ratio: 1;
+	@focalX: false;
+	@focalY: false;
+) {
+	@xxs_x: @percentWidth * @screenXsMin;
+	@xs_x: @percentWidth * @screenSmMin;
+	@sm_x: @percentWidth * @screenMdMin;
+	@md_x: @percentWidth * @screenLgMin;
+	@lg_x: @percentWidth * @maxWidth;
+
+	@xxs_y: @xxs_x / @ratio;
+	@xs_y: @xs_x / @ratio;
+	@sm_y: @sm_x / @ratio;
+	@md_y: @md_x / @ratio;
+	@lg_y: @lg_x / @ratio;
+
+	.theme-image-ratio( @image; @xxs_x; @xxs_y );
+
+	.utility-responsiveBackgroundImage__breakpoint( @image; @screenXsMin; @xs_x; @xs_y; @maxWidth );
+	.utility-responsiveBackgroundImage__breakpoint( @image; @screenSmMin; @sm_x; @sm_y; @maxWidth );
+	.utility-responsiveBackgroundImage__breakpoint( @image; @screenMdMin; @md_x; @md_y; @maxWidth );
+	.utility-responsiveBackgroundImage__breakpoint( @image; @screenLgMin; @lg_x; @lg_y; @maxWidth );
+
+	.utility-responsiveBackgroundImage__breakpoint( @image; @breakpoint; @width; @height; @maxWidth ) {
+		& when ( @width =< @maxWidth ) {
+			@media ( min-width: @breakpoint ) {
+				.theme-image-ratio( @image; @width; @height );
+			}
+		}
+	}
+
+	& when not ( @focalX  = false ) and not ( @focalY = false ) {
+		background-position: ~"@{focalX}% @{focalY}%";
+	}
+}
+
+
+// ------ Responsive Gutter ------
+.utility-responsiveGutter( @propertyName ) {
+	@media ( min-width: @screenSmMin ) {
+		@{propertyName}: calc( ~"( 100vw - @{containerWidthSm} ) / 2" );
+	}
+	@media ( min-width: @screenMdMin ) {
+		@{propertyName}: calc( ~"( 100vw - @{containerWidthMd} ) / 2" );
+	}
+	@media ( min-width: @screenLgMin ) {
+		@{propertyName}: calc( ~"( 100vw - @{containerWidthLg} ) / 2" );
+	}
+}

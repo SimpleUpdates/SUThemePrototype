@@ -1,78 +1,49 @@
 {% extends base_layout %}
 
 {% block theme_head %}
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ su.site.name }}{% if su.page.title != "" %} : {{ su.page.title }}{% endif %}</title>
-		<link href="//fonts.googleapis.com/css?family=Pacifico|Alegreya+Sans+SC" rel="stylesheet" type="text/css">
+	{% include "partial/metadata.html" %}
 {% endblock %}
 
 {% block theme_body %}
 <body class="{{ body_class }}">
-	{% block logoSitename %}
-	<div class="row">
-		<div class="col-sm-12">
-			{% include "partial/branding.html" %}
-		</div>
-	</div>
-	{% endblock %}
-	
-	{% block navigation %}
-	<div class="row">
-		<div class="col-sm-12">
-			{% include "partial/navigation.html" %}
-		</div>
-	</div>
-	{% endblock %}
-	
-	{% block heroImage endblock %}
-	
-	{% block search %}
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				{% include "partial/search.html" %}
-			</div>
-		</div>
-	</div>
-	{% endblock %}
-	
-	{% block socialIcons %}
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				{% include "partial/socialIcons.html" %}
-			</div>
-		</div>
-	</div>
-	{% endblock %}
+	<div id="site-bg" class="row-offcanvas row-offcanvas-right">
 
-	<section class="content container">
-		{% block content_header %}
-		<div class="row">
-			<div class="col-sm-12">
-				{% block breadcrumbsShare %}
-					{% include "partial/breadcrumbsShare.html" %}
-				{% endblock %}
-				
-				{% block titleShow %}
-					{% include "partial/titleShow.html" %}
-				{% endblock %}
+		{% include "partial/branding.html" %}
+
+		{% include "partial/navigation.html" %}
+
+		{% block hero endblock %}
+
+		{% block headerTitle endblock %}
+
+		<section>
+			<div class="container">
+				<div class="content-area">
+					<div class="main-content">
+
+						{% block imageButtons endblock %}
+
+						{% block breadcrumbsShare %}
+							<div class="content-breadcrumbsShare">
+								{% include "partial/breadcrumbs.html" %}
+								{% include "partial/shareMenu.html" %}
+							</div>
+						{% endblock %}
+
+						{% include "partial/contentOptions.html" %}
+
+						{% block pageContent %}{{ su.content }}{% endblock %}
+
+					</div>
+				</div>
 			</div>
-		</div>
-		{% endblock %}
-		{% block content_wrapper %}
-		<div class="row">
-			<div class="col-sm-12">
-				{{ su.content }}
-			</div>
-		</div>
-		{% endblock %}
-	</section>
-	
-	{% block footer %}
+		</section>
+
 		{% include "partial/footer.html" %}
-	{% endblock %}
-	
+
+	</div>
+
 	{% include "partial/imageEffects.html" %}
+
 </body>
 {% endblock %}

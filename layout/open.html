@@ -1,16 +1,16 @@
 {% extends "layout/default.html" %}
 
-{% set body_class = "open" %}
+{% set body_class = "layout-open" %}
 
-{% block heroImage %}
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="hero no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 165 ) }}' );"{% endif %}></div>
-		</div>
-	</div>
+{% block headerTitle %}
+	<div class="banner-image no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 200 ) }}' );"{% endif %}></div>
 {% endblock %}
 
-{% block content_wrapper %}
-	{{ parent () }}<br /><br />
-	{% include "partial/subpages.html" %}
+{% block pageContent %}
+	<div class="row">
+		<article class="col-sm-12">
+			{{ parent() }}
+			{% include "partial/relatedInfo.html" with { useNewlines: false } %}
+		</article>
+	</div>
 {% endblock %}

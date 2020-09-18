@@ -1,9 +1,37 @@
-@font: arial, helvetica, sans-serif;
+@fontFamily: 'Gentium Basic', serif;
 
-@primaryColor:	@config-primaryColor;
-@white:			#fff;
-@black:			#000;
+@headerBlockColor: @config-headerBlockColor;
+@backgroundColor:  @config-backgroundColor;
 
+@accentColor:				@config-accentColor;
+@accentHue:					hue( @accentColor );
+@accentSaturation:			saturation( @accentColor );
+
+@accentColorBleached:		hsl( @accentHue, @accentSaturation, 95% );
+@accentColorLight:			hsl( @accentHue, @accentSaturation, 85% );
+@accentColorMid1:			hsl( @accentHue, @accentSaturation, 70% );
+@accentColorMid2: 			hsl( @accentHue, @accentSaturation, 60% );
+@accentColorMid3:			hsl( @accentHue, @accentSaturation, 50% );
+@accentColorDim:			hsl( @accentHue, @accentSaturation, 35% );
+@accentColorDark:			hsl( @accentHue, @accentSaturation, 20% );
+
+@accentColorTransparent:	hsla( @accentHue, @accentSaturation, 10%, 0.3 );
+
+/* legacy */
+@gradientLight: lighten( @accentColor, 5% );
+@gradientDark: darken( @accentColor, 5% );
+@linkColor: @accentColor;
+@linkColorHover: desaturate( lighten( @accentColor, 33% ), 20% );
+
+@white: #fff;
+@grayBleached: #ebebeb;
+@grayLight: #858585;
+@grayMedium: #5c5c5c;
+@grayDim: #454545;
+@grayDark: #313131;
+@black: #2d2d2d;
+
+@screenXsMin: 480px;
 @screenSmMin: 768px;
 @screenMdMin: 992px;
 @screenLgMin: 1200px;
@@ -12,95 +40,206 @@
 @screenSmMax: ( @screenMdMin - 1 );
 @screenMdMax: ( @screenLgMin - 1 );
 
-.transition( @property, @duration ) {
-	-webkit-transition: @property @duration;
-	-moz-transition: @property @duration;
-	-ms-transition: @property @duration;
-	-o-transition: @property @duration;
-	transition: @property @duration;
-}
-
-.transform-style( @style ) {
-	-webkit-transform-style: @style;
-	-moz-transform-style: @style;
-	-ms-transform-style: @style;
-	transform-style: @style;
-}
-
-.transform( @transformation ) {
-	-webkit-transform: @transformation;
-	-moz-transform: @transformation;
-	-ms-transform: @transformation;
-	-o-transform: @transformation;
-	transform: @transformation;
-}
-
-/* Sticky Footer */
-html, body {
-	min-height: 100vh;
-}
-body {
-	display: flex;
-	flex-direction: column;
-}
-header, footer {
-	flex: none;
-}
-.content {
-	flex: 1 0 auto;
+#site-bg {
+	background-color: @backgroundColor;
 }
 
 .su_bootstrap_safe {
 	body {
-		background-color: @white;
-		font-size: 15px;
-		color: @black;
-		font-family: @font;
+		background-color: @headerBlockColor;
+		color: @grayDark;
+		font: 13pt/1.5em @fontFamily;
 	}
-	.content {
-		padding-top: 2rem;
-		padding-bottom: 2rem;
+	h1, h2, h3, h4, h5, h6 {
+		color: @accentColor;
 	}
-	.sidebar {
-		@media ( max-width: @screenXsMax ) {
-			border-top: 1px solid @primaryColor;
-			padding-top: 2rem;
-			margin-top: 2rem;
+	a {
+		color: @accentColorDim;
+		&:hover {
+			color: @accentColorDark;
 		}
-	}
-	.fc-view-container {
-		background-color: @white;
-	}
-	h1, h2, h3, h4, h5 {
-		font-family: @font;
-	}
-	h1.page-title {
-		text-align: center;
-		border-bottom: 1px solid @primaryColor;
-		padding-bottom: 1rem;
-		margin-bottom: 3rem;
 	}
 	hr {
 		border-color: #ddd;
 	}
-	a {
-		transition: border .5s;
-		color: @primaryColor;
-		&:hover {
+	img {
+		image-rendering: -webkit-optimize-contrast;
+	}
+	aside {
+		@media ( max-width: @screenSmMin ) {
+			margin-top: 2em;
+		}
+	}
+	.layout-article .banner-image,
+	.layout-open .banner-image {
+		min-height: 200px;
+		.theme-image-fill( @config-headlineArticleBgImage; 1500px; 200px );
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+	/*.layout-homeHero .banner-image {
+		min-height: 425px;
+		.theme-image-fill( @config-headlineHomeBgImage; 1500px; 425px );
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: ~"@{config-headlineHomeBgImage-focalpoint-x}% @{config-headlineHomeBgImage-focalpoint-y}%";
+	}*/
+
+	.gallery--mosaic > a.gallery--mosaic--image {
+		text-decoration: none;
+	}
+
+	blockquote {
+		@quoteMarkColor: @accentColorLight;
+	
+		font-weight: 300;
+		font-size: 1.15em;
+		font-style: italic;
+		padding: 2em 5em 2em 3em;
+		margin: 0;
+		display: inline-block;
+		border-left: 0 solid transparent;
+		quotes: "\201C" "\201D" "\2018" "\2019";
+		position: relative;
+		opacity: .7;
+		p {
+			margin: 0;
+		}
+		footer {
+			padding: 0 1em;
+			border-top: 0 solid transparent;
+			text-align: right;
+			margin-bottom: 0;
+			border-bottom: 0 solid transparent;
+		}
+		&:before {
+			color: @quoteMarkColor;
+			content: open-quote;
+			font-size: 8em;
+			position: absolute;
+			top: 3rem;
+			left: -1.15rem;
+			font-family: 'Alegreya Sans SC', sans-serif;
+		}
+		&:after {
+			color: @quoteMarkColor;
+			content: close-quote;
+			font-size: 8em;
+			position: absolute;
+			bottom: -.75rem;
+			right: 4rem;
+			font-family: 'Alegreya Sans SC', sans-serif;
+		}
+	}
+	
+	.relatedInfo {
+		overflow: hidden;
+		ul {
+			padding-left: 0;
+		}
+		li {
+			margin-right: 1.5em;
+			margin-bottom: .5em;
+		}
+		a {
 			text-decoration: none;
-			color: @black;
+		}
+		&:not( .relatedInfo__newlines ) li {
+			display: inline-block;
+		}
+	}
+	
+	/* imageEffects */
+	.editable__in [data-sr-id] { // override ScrollReveal image effects
+		opacity: 1 !important;
+		visibility: visible !important;
+		transform: none !important;
+	}
+	
+	.transition( @property, @duration ) {
+		-webkit-transition: @property @duration;
+		-moz-transition: @property @duration;
+		-ms-transition: @property @duration;
+		-o-transition: @property @duration;
+		transition: @property @duration;
+	}
+	
+	.transform-style( @style ) {
+		-webkit-transform-style: @style;
+		-moz-transform-style: @style;
+		-ms-transform-style: @style;
+		transform-style: @style;
+	}
+	
+	.transform( @transformation ) {
+		-webkit-transform: @transformation;
+		-moz-transform: @transformation;
+		-ms-transform: @transformation;
+		-o-transform: @transformation;
+		transform: @transformation;
+	}
+	
+	.placeholder-color( @color ) {
+		&::-webkit-input-placeholder {
+			color: @color;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+			color: @color;
+		}
+		&::-moz-placeholder { /* Firefox 19+ */
+			color: @color;
+		}
+		&:-ms-input-placeholder {
+			color: @color;
 		}
 	}
 
-	@import "blockquote";
+	/* ~"color" explanation: https://github.com/less/less.js/issues/1595 */
+	@registeredColors:
+			headerBlockColor,
+			backgroundColor,
+			accentColor,
+			accentColorBleached,
+			accentColorLight,
+			accentColorMid1,
+			accentColorMid2,
+			accentColorMid3,
+			accentColorDim,
+			accentColorDark,
+			~"white",
+			grayBleached,
+			grayLight,
+			grayMedium,
+			grayDim,
+			grayDark,
+			~"black",
+			gradientLight,
+			gradientDark,
+			linkColor,
+			linkColorHover;
+
 	@import "branding";
-	@import "breadcrumbsShare";
-	@import "button";
-	@import "contactInfo";
-	@import "footer";
-	@import "hero";
 	@import "navigation";
+	@import "carousel";
+	@import "contentOptions";
+	@import "content";
+	@import "breadcrumbs";
+	@import "imageButton";
+	@import "relatedInfo";
 	@import "search";
+	@import "shareMenu";
+	@import "slide";
 	@import "socialIcons";
-	@import "subpages";
+	@import "horizontalButtons";
+	@import "twoUpContent";
+	@import "footer";
+
+	@import "print";
 }
+
+// These file should be imported at the top level outside any selectors in order to make it possible for variables to be
+// overridden in Custom CSS.
+@import "variables";
+@import "utilities";
+

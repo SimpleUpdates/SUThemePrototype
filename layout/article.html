@@ -1,22 +1,18 @@
 {% extends "layout/default.html" %}
 
-{% set body_class = "article" %}
+{% set body_class = "layout-article" %}
 
-{% block heroImage %}
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="hero no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 165 ) }}' );"{% endif %}></div>
-		</div>
-	</div>
+{% block headerTitle %}
+	<div class="banner-image no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 200 ) }}' );"{% endif %}></div>
 {% endblock %}
 
-{% block content_wrapper %}
-	<div class="row">
-		<div class="col-sm-8">
-			{{ parent () }}
-		</div>
-		<div class="col-sm-4 sidebar">
-			{% include "partial/subpages.html" %}<br /><br />
-			{{ su.editable.region( "sidebar" ) }}</div>
-	</div>
+{% block pageContent %}
+	{% set afterSidebar %}
+		{% include "partial/relatedInfo.html" %}
+	{% endset %}
+
+	{% include "partial/twoUpContent.html" with {
+		mainContent: parent(),
+		afterSidebar: afterSidebar
+	} only %}
 {% endblock %}

@@ -1,0 +1,30 @@
+{% set useNewlines = ( useNewlines is defined ) ? useNewlines : true %}
+
+{% if su.theme.config( "showRelatedInfo" ) %}
+	{% set relatedInfoTitle = ( relatedInfoTitle is defined ) ? relatedInfoTitle : "Related Information" %}
+	{% set useNewlines = ( useNewlines is defined ) ? useNewlines : true %}
+	
+	{% set parent	= ( parent is defined or su.page.parent == su.page.root ) ? parent : su.page.parent %}
+	{% set siblings	= ( siblings is defined or su.page.parent == su.page.root ) ? siblings : su.page.parent.children %}
+	{% set children	= ( children is defined ) ? children : su.page.children %}
+	
+	{% if ( parent or siblings or children ) %}
+		<div class="relatedInfo no-print {% if useNewlines %}relatedInfo__newlines{% endif %}">
+			{% if relatedInfoTitle %}<h4>{{ relatedInfoTitle }}</h4>{% endif %}
+			
+			<ul>
+				{% if parent %}
+					<li><a href="{{ parent.url }}" target="{{ parent.target }}">{{ parent.navigationLabel }}</a></li>
+				{% endif %}
+				
+				{% for sibling in siblings if not sibling.current %}
+					<li><a href="{{ sibling.url }}" target="{{ sibling.target }}">{{ sibling.navigationLabel }}</a></li>
+				{% endfor %}
+				
+				{% for child in children %}
+					<li><a href="{{ child.url }}" target="{{ child.target }}">{{ child.navigationLabel }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+{% endif %}

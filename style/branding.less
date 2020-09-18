@@ -1,27 +1,44 @@
 .branding {
-	display: flex;
-	align-items: center;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	@backgroundColor: @headerBlockColor;
+	@textColor: contrast( @backgroundColor, @grayBleached, @grayDark );
+
+	color: @textColor;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: @backgroundColor;
 	.logo {
-		float: left;
-		padding-right: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 110px;
+		> img {
+			max-height: 100%;
+		}
 	}
-	.logo-image {
-		width: 5rem;
-		height: 0;
-		padding-bottom: 100%;
-		background-size: contain;
-		background-position: 50%;
-		background-repeat: no-repeat;
+	h1.sitename {
+		margin-top: 10px;
+		margin-bottom: 0;
+		color: @textColor;
+	}
+}
+.brandingCenter {
+	text-align: center;
+}
+.brandingLeft {
+	text-align: left;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.logo {
+		margin-right: 1rem;
 	}
 	h1 {
 		margin-top: 0;
-		margin-bottom: 0;
-	}
-	h2 {
-		font-size: 1.3rem;
-		margin-top: .1rem;
-		margin-bottom: 0;
 	}
 }
+.sitename, .slogan {
+	small {
+		color: inherit;
+	}
+}
+	

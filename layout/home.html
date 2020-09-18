@@ -1,22 +1,19 @@
 {% extends "layout/default.html" %}
 
-{% set body_class = "home" %}
+{% set body_class = "layout-home" %}
 
-{% block heroImage %}
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="hero no-print"{% if su.page.featuredImage %} style="background-image: url( '{{ su.page.featuredImage.fill( 1500, 425 ) }}' );"{% endif %}></div>
-		</div>
-	</div>
+{% block hero %}
+	{% include "partial/carousel.html" %}
 {% endblock %}
 
-{% block content_wrapper %}
-	<div class="row">
-		<div class="col-sm-8">
-			{{ parent () }}
-		</div>
-		<div class="col-sm-4 sidebar">
-			{% include "partial/subpages.html" %}<br /><br />
-			{{ su.editable.region( "sidebar" ) }}</div>
-	</div>
+{% block imageButtons  %}
+	{% include "partial/horizontalButtons.html" %}
+{% endblock %}
+
+{% block breadcrumbsShare endblock %}
+
+{% block pageContent %}
+	{% include "partial/twoUpContent.html" with {
+		mainContent: parent()
+	} %}
 {% endblock %}
