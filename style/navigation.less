@@ -1,26 +1,26 @@
-@themeNavigation__mobileDrawerSelector: ~".module-themeNavigation__mobileToggle:checked ~ ul";
+@themeNavigation__mobileDrawerSelector: ~".themeNavigation__mobileToggle:checked ~ ul";
 @themeNavigation__arrowPosition: @themeNavigation__linkHorizontalPadding / 2;
 @themeNavigation__burgerWidth: 65px;
 
-.module-themeNavigation {
+.themeNavigation {
 	background-color: @themeNavigation__backgroundColor;
 	font-size: @themeNavigation__fontSize;
 	display: flex;
 	width: 100%;
-	.module-themeNavigation__before,
-	.module-themeNavigation__after {
+	.themeNavigation__before,
+	.themeNavigation__after {
 		flex: 1 0 auto;
 		max-width: calc( ~"100% - @{themeNavigation__burgerWidth}" );
 		display: flex;
 		align-items: center;
 	}
-	.module-themeNavigation__before {
+	.themeNavigation__before {
 		margin-right: 1em;
 	}
-	.module-themeNavigation__after {
+	.themeNavigation__after {
 		margin-left: 1em;
 	}
-	.module-themeNavigation__nav {
+	.themeNavigation__nav {
 		height: @themeNavigation__linkHeight;
 		overflow: hidden;
 		display: flex;
@@ -53,7 +53,7 @@
 		}
 	}
 
-	.module-themeNavigation__transition( @property, @duration ) {
+	.themeNavigation__transition( @property, @duration ) {
 		-webkit-transition: @property @duration;
 		-moz-transition: @property @duration;
 		-ms-transition: @property @duration;
@@ -61,27 +61,27 @@
 		transition: @property @duration;
 	}
 	
-	.module-themeNavigation__transformStyle( @style ) {
+	.themeNavigation__transformStyle( @style ) {
 		-webkit-transform-style: @style;
 		-moz-transform-style: @style;
 		-ms-transform-style: @style;
 		transform-style: @style;
 	}
 	
-	.module-themeNavigation__transform( @transformation ) {
+	.themeNavigation__transform( @transformation ) {
 		-webkit-transform: @transformation;
 		-moz-transform: @transformation;
 		-ms-transform: @transformation;
 		-o-transform: @transformation;
 		transform: @transformation;
 	}
-	.module-themeNavigation-arrow {
+	.themeNavigation-arrow {
 		color: @themeNavigation__arrowColor;
 		width: 0;
 		height: auto;
 		position: relative;
 		right: @themeNavigation__arrowPosition;
-		.module-themeNavigation__caret {
+		.themeNavigation__caret {
 			pointer-events: none;
 			position: absolute;
 			right: 0;
@@ -90,12 +90,12 @@
 			border-top: 4px solid \9;
 			border-right: 4px solid transparent;
 			border-left: 4px solid transparent;
-			.module-themeNavigation__transition( transform, 400ms );
-			.module-themeNavigation__transformStyle( preserve-3d );
+			.themeNavigation__transition( transform, 400ms );
+			.themeNavigation__transformStyle( preserve-3d );
 		}
 	}
 	
-	@{themeNavigation__mobileDrawerSelector} .module-themeNavigation-arrow {
+	@{themeNavigation__mobileDrawerSelector} .themeNavigation-arrow {
 		width: @themeNavigation__mobileArrowSize;
 		height: @themeNavigation__mobileArrowSize;
 		color: @themeNavigation__mobileArrowColor;
@@ -108,14 +108,14 @@
 		position: absolute;
 		right: 0;
 		top: 0;
-		.module-themeNavigation__caret {
+		.themeNavigation__caret {
 			position: relative;
 			top: -1px;
 			right: auto;
-			.module-themeNavigation__transform( rotateX( 0 ) );
+			.themeNavigation__transform( rotateX( 0 ) );
 		}
 	}
-	.module-themeNavigation__burger {
+	.themeNavigation__burger {
 		text-align: @themeNavigation__mobileHamburgerAlignment;
 		color: @themeNavigation__linkColor;
 		min-width: 0;
@@ -136,7 +136,7 @@
 			}
 		}
 	}
-	.module-themeNavigation__mobileToggle:checked ~ .module-themeNavigation__burger::before {
+	.themeNavigation__mobileToggle:checked ~ .themeNavigation__burger::before {
 		content: "";
 		display: block;
 		position: fixed;
@@ -147,13 +147,13 @@
 		height: 100vh;
 		background-color: rgba( 0, 0, 0, .5 );
 	}
-	.module-themeNavigation__mobileToggle,
-	.module-themeNavigation__mobileClose {
+	.themeNavigation__mobileToggle,
+	.themeNavigation__mobileClose {
 		display: none;
 	}
 	
-	.module-themeNavigation__mobileToggle:checked {
-		~ .module-themeNavigation__mobileClose {
+	.themeNavigation__mobileToggle:checked {
+		~ .themeNavigation__mobileClose {
 			display: block;
 			position: fixed;
 			color: @themeNavigation__mobileLinkColor;
@@ -181,7 +181,7 @@
 			position: fixed;
 			top: 0;
 			left: 0;
-			.module-themeNavigation-dropdown a {
+			.themeNavigation-dropdown a {
 				padding-left: 2rem;
 			}
 			@media ( max-width: @themeNavigation__fullWidthDrawerBreakpoint ) {
@@ -189,7 +189,7 @@
 			}
 		}
 		& when ( @themeNavigation__mobileDrawerAlignment = right ) {
-			~ .module-themeNavigation__mobileClose {
+			~ .themeNavigation__mobileClose {
 				left: auto;
 				right: 0;
 			}
@@ -199,9 +199,9 @@
 			}
 		}
 	}
-	.module-themeNavigation-topLevelLink {
+	.themeNavigation-topLevelLink {
 		height: @themeNavigation__linkHeight;
-		.module-themeNavigation__dropdownToggle {
+		.themeNavigation__dropdownToggle {
 			display: none;
 		}
 		&, li {
@@ -226,13 +226,13 @@
 					color: @themeNavigation__linkColorHover;
 					border-color: @themeNavigation__borderTopColorHover @themeNavigation__borderRightColorHover @themeNavigation__borderBottomColorHover @themeNavigation__borderLeftColorHover;
 				}
-				.module-themeNavigation-arrow {
+				.themeNavigation-arrow {
 					color: @themeNavigation__arrowColorHover;
 				}
-				.module-themeNavigation__caret {
-					.module-themeNavigation__transform( rotateX( 180deg ) );
+				.themeNavigation__caret {
+					.themeNavigation__transform( rotateX( 180deg ) );
 				}
-				.module-themeNavigation-dropdown {
+				.themeNavigation-dropdown {
 					display: block;
 				}
 			}
@@ -242,16 +242,16 @@
 					color: @themeNavigation__linkColorActive;
 					border-color: @themeNavigation__borderTopColorActive @themeNavigation__borderRightColorActive @themeNavigation__borderBottomColorActive @themeNavigation__borderLeftColorActive;
 				}
-				.module-themeNavigation-arrow {
+				.themeNavigation-arrow {
 					color: @themeNavigation__arrowColorActive;
 				}
 			}
 		}
 		& when ( @themeNavigation__dropdownAlignmentEdge = right ) {
-			.module-themeNavigation__alignChildDropdownToRightEdge();
+			.themeNavigation__alignChildDropdownToRightEdge();
 		}
 		&:last-child {
-			.module-themeNavigation__alignChildDropdownToRightEdge();
+			.themeNavigation__alignChildDropdownToRightEdge();
 		}
 		> a {
 			line-height: @themeNavigation__linkHeight - ( @themeNavigation__borderTopSize + @themeNavigation__borderBottomSize );
@@ -264,7 +264,7 @@
 		}
 	}
 	
-	@{themeNavigation__mobileDrawerSelector} .module-themeNavigation-topLevelLink {
+	@{themeNavigation__mobileDrawerSelector} .themeNavigation-topLevelLink {
 		direction: ltr;
 		flex: 0 0 auto;
 		position: relative;
@@ -296,17 +296,17 @@
 					background-color: @themeNavigation__mobileLinkBackgroundColorActive;
 					color: @themeNavigation__mobileLinkColorActive;
 				}
-				> .module-themeNavigation-arrow {
+				> .themeNavigation-arrow {
 					color: @themeNavigation__mobileArrowColorActive;
 				}
 			}
 		}
-		&:hover .module-themeNavigation-dropdown {
+		&:hover .themeNavigation-dropdown {
 			display: none;
 		}
-		.module-themeNavigation__dropdownToggle:checked {
-			~ .module-themeNavigation-arrow .module-themeNavigation__caret {
-				.module-themeNavigation__transform( rotateX( 180deg ) );
+		.themeNavigation__dropdownToggle:checked {
+			~ .themeNavigation-arrow .themeNavigation__caret {
+				.themeNavigation__transform( rotateX( 180deg ) );
 			}
 			~ ul {
 				display: block;
@@ -314,17 +314,17 @@
 		}
 	}
 	
-	.module-themeNavigation__alignChildDropdownToRightEdge() {
+	.themeNavigation__alignChildDropdownToRightEdge() {
 		/* direction: rtl;
 		text-align: left;
 		> * {
 			direction: ltr;
 		}
-		.module-themeNavigation-arrow {
+		.themeNavigation-arrow {
 			right: calc( ~"-100% + @{themeNavigation__arrowPosition}" );
 		} */
 	}
-	.module-themeNavigation-dropdown {
+	.themeNavigation-dropdown {
 		background-color: @themeNavigation__dropdownBackgroundColor;
 		display: none;
 		position: absolute;
@@ -358,7 +358,7 @@
 		}
 	}
 	
-	@{themeNavigation__mobileDrawerSelector} .module-themeNavigation-dropdown {
+	@{themeNavigation__mobileDrawerSelector} .themeNavigation-dropdown {
 		position: relative;
 		flex: 0 0 100%;
 	}
