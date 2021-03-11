@@ -42,7 +42,13 @@
 	
 	<div class="responsiveImage {{ classes }}"
 	style="--x: {{ srcSize[0] }}; --y: {{ srcSize[1] }}; --focalX: {{ image.focalPoint.x~"%" }}; --focalY: {{ image.focalPoint.y~"%" }};">
-		<img src="{{ src }}" srcset="{{ srcset }}" alt="{{ alt }}"{% if parallax %} style="--translateZ: {{ translateZ }}; --scale: {{ scale }}"{% endif %} />
+		{% if slide.image %}
+			<img src="{{ src }}" srcset="{{ srcset }}" alt="{{ alt }}"{% if parallax %} style="--translateZ: {{ translateZ }}; --scale: {{ scale }}"{% endif %} />
+		{% elseif slide.video %}
+			<video playsinline autoplay muted loop>
+				<source src="{{slide.video}}">
+			</video>
+		{% endif %}
 	</div>
 	
 	<div class="overlay">
