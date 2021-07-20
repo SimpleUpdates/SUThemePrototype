@@ -52,7 +52,6 @@
 	</div>
 	
 	<div class="overlay">
-	
 		{% if slide.caption or slide.description %}
 			<div class="slide__caption container {{ slide.alignment }}">
 				<div class="slide__content">
@@ -61,6 +60,6 @@
 				</div>
 			</div>
 		{% endif %}
-	
-	</{{ slide.url ? "a" : "div" }}>
-</div>
+	</div>
+
+</{{ slide.url ? "a" : "div" }}>
