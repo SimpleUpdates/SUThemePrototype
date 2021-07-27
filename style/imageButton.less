@@ -1,21 +1,20 @@
 .imageButton {
-	@titleColor: @accentColorDark;
-	@titleColorHover: @accentColorDim;
-	@borderColor: @grayBleached;
-
 	margin-bottom: 20px;
 	float: left;
 	width: 100%;
-	//max-width: 280px;
 	&.clear {
 		clear: left;
 	}
 	a {
-		color: @titleColor;
 		text-decoration: none;
+		h3 {
+			color: @accentColorDark;
+		}
 		&:hover {
 			text-decoration: none;
-			color: @titleColorHover;
+			h3 {
+				color: @accentColorDim;
+			}
 			> .img-border {
 				transform: scale( 1.1 );
 			}
