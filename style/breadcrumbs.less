@@ -1,6 +1,4 @@
 // ------ Breadcrumb Variables ------
-@breadcrumbs__textColor: black;
-@breadcrumbs__arrowColor: @breadcrumbs__textColor;
 @breadcrumbs__arrowSize: 8px;
 
 .content-breadcrumbs {
@@ -14,7 +12,7 @@
 		content: "";
 		width: 0;
 		height: 0;
-		border-left: @arrowBorderSize solid @breadcrumbs__arrowColor;
+		border-left: @arrowBorderSize solid @black;
 		border-top: @arrowBorderSize solid transparent;
 		border-right: @arrowBorderSize solid transparent;
 		border-bottom: @arrowBorderSize solid transparent;
@@ -24,7 +22,7 @@
 		margin-right: calc( ~".5em - @{arrowBorderSize}" );
 	}
 	li:last-child a {
-		color: @breadcrumbs__textColor;
+		color: @black;
 		pointer-events: none;
 		cursor: default;
 		&, &:hover {

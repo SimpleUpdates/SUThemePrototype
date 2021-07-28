@@ -1,44 +1,32 @@
 // ------ Carousel Variables ------
-@carousel__slideMinHeight: 0;
-@carousel__preloadColor: transparent;
-
-@carousel__arrowFontSize: 3.5rem;
-@carousel__arrowOuterPadding: .7vw;
-@carousel__arrowOpacity: .5;
-@carousel__arrowOpacityHover: 1;
-@carousel__arrowOpacityActive: @carousel__arrowOpacityHover;
-@carousel__arrowOpacityFocus: @carousel__arrowOpacityHover;
-
-@carousel__dotSize: 12px;
-@carousel__dotWidth: @carousel__dotSize;
-@carousel__dotHeight: @carousel__dotSize;
+@carousel__dotWidth: 12px;
+@carousel__dotHeight: 12px;
 @carousel__dotAlign: center;
-@carousel__dotBorderColor: white;
+@carousel__dotBorderColor: @white;
 @carousel__dotBorderColorActive: @carousel__dotBorderColor;
 @carousel__dotBackgroundColor: transparent;
 @carousel__dotBackgroundColorActive: @carousel__dotBorderColor;
-@carousel__dotBorderWidth: 1px;
-@carousel__dotShadow: 0 0 1rem rgba( 0,0,0,.3 ), inset 0 0 1rem rgba( 0,0,0,.1 );
-@carousel__dotShadowActive: 0 0 1rem rgba( 0,0,0,.3 );
 @carousel__dotTouchTargetSize: 40px;
 
-@carousel__kenBurnsSlideRelativeSelector: ~'';
+@carousel__kenBurnsSlideRelativeSelector: ~'img';
 @carousel__kenBurnsTimingFunction: ease;
 @carousel__kenBurnsSpeed: 9s;
 @carousel__kenBurnsScale: 1.2;
 @carousel__kenBurnsScaleActive: 1;
 
+@local__marginBottom: max( 0, ( @carousel__dotTouchTargetSize - @carousel__dotHeight ) / 2 );
+
 .carousel {
 	.slick-arrow {
-		font-size: @carousel__arrowFontSize;
-		opacity: @carousel__arrowOpacity;
+		font-size: 3.5rem;
+		opacity: .5;
 		display: block;
 		width: 10rem;
 		position: absolute;
 		top: 0;
 		bottom: 0;
 		z-index: 50;
-		color: white;
+		color: @white;
 		filter: drop-shadow( 0 0 1rem rgba( 0,0,0,.7 ));
 		background-color: transparent;
 		border: none;
@@ -46,27 +34,25 @@
 		&.slick-prev {
 			left: 0;
 			text-align: left;
-			padding-left: @carousel__arrowOuterPadding;
+			padding-left: .7vw;
 		}
 		&.slick-next {
 			right: 0;
 			text-align: right;
-			padding-right: @carousel__arrowOuterPadding;
+			padding-right: .7vw;
 		}
 		&:hover {
-			opacity: @carousel__arrowOpacityHover;
+			opacity: 1;
 		}
 		&:active {
-			opacity: @carousel__arrowOpacityActive;
+			opacity: 1;
 		}
 		&:focus {
-			opacity: @carousel__arrowOpacityFocus;
+			opacity: 1;
 			outline: none;
 		}
 	}
-	.slick-dots {
-		@local__marginBottom: max( 0, ( @carousel__dotTouchTargetSize - @carousel__dotHeight ) / 3 );
-	
+	.slick-dots {	
 		position: absolute;
 		bottom: 0;
 		width: 100%;
@@ -108,15 +94,15 @@
 				width: @carousel__dotWidth;
 				height: @carousel__dotHeight;
 				background-color: @carousel__dotBackgroundColor;
-				border: @carousel__dotBorderWidth solid @carousel__dotBorderColor;
-				box-shadow: @carousel__dotShadow;
+				border: 1px solid @carousel__dotBorderColor;
+				box-shadow: 0 0 1rem rgba( 0,0,0,.3 ), inset 0 0 1rem rgba( 0,0,0,.1 );
 				border-radius: 100%;
 			}
 		}
 		.slick-active button::after {
 			background-color: @carousel__dotBackgroundColorActive;
-			border: @carousel__dotBorderWidth solid @carousel__dotBorderColorActive;
-			box-shadow: @carousel__dotShadowActive;
+			border: 1px solid @carousel__dotBorderColorActive;
+			box-shadow: 0 0 1rem rgba( 0,0,0,.3 );
 		}
 	}
 	& {
@@ -126,8 +112,8 @@
 			opacity: 1;
 		}
 		&.preload {
-			height: @carousel__slideMinHeight;
-			background-color: @carousel__preloadColor;
+			height: 0;
+			background-color: transparent;
 			> * {
 				opacity: 0;
 			}
@@ -135,7 +121,7 @@
 	}
 	.slick-slide {
 		position: relative;
-		min-height: @carousel__slideMinHeight;
+		min-height: 0;
 	}
 	
 	&.carousel__kenBurns {
@@ -146,14 +132,5 @@
 		.slick-slide.slick-active @{carousel__kenBurnsSlideRelativeSelector} {
 			transform: scale( @carousel__kenBurnsScaleActive );
 		}
-	}
-}
-
-@carousel__slideMinHeight: 0;
-@carousel__kenBurnsSlideRelativeSelector: ~'img';
-
-.carousel {
-	.slick-dots {
-		margin-bottom: 18px;
 	}
 }
