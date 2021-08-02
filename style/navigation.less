@@ -4,11 +4,11 @@
 
 /* Base */
 
-@themeNavigation__black: black;
-@themeNavigation__white: white;
-@themeNavigation__backgroundColor: rgba( 255,255,255,0 );
+@themeNavigation__black: @black;
+@themeNavigation__white: @white;
+@themeNavigation__backgroundColor: @backgroundColor;
 @themeNavigation__linkBackgroundColor: transparent;
-@themeNavigation__linkBackgroundColorActive: contrast( @themeNavigation__backgroundColor, @themeNavigation__black, @themeNavigation__white );
+@themeNavigation__linkBackgroundColorActive: mix( @themeNavigation__backgroundColor, contrast( @themeNavigation__backgroundColor, @black, @white ), 90% );
 @themeNavigation__linkBackgroundColorHover: @themeNavigation__linkBackgroundColorActive;
 @themeNavigation__linkColor: contrast( @themeNavigation__backgroundColor, @themeNavigation__black, @themeNavigation__white );
 @themeNavigation__linkColorActive: contrast( @themeNavigation__linkBackgroundColorActive, @themeNavigation__black, @themeNavigation__white );
@@ -16,11 +16,9 @@
 @themeNavigation__arrowColor: @themeNavigation__linkColor;
 @themeNavigation__arrowColorActive: @themeNavigation__linkColorActive;
 @themeNavigation__arrowColorHover: @themeNavigation__linkColorHover;
-@themeNavigation__linkHeight: 2.5rem;
+@themeNavigation__linkHeight: 3rem;
 @themeNavigation__linkWeight: normal;
 @themeNavigation__linkHorizontalPadding: 1rem;
-@themeNavigation__fontSize: 1em;
-@themeNavigation__alignment: left;
 
 /* Borders */
 
@@ -54,7 +52,7 @@
 @themeNavigation__dropdownLinkColorHover: contrast( @themeNavigation__dropdownBackgroundColorHover, @themeNavigation__black, @themeNavigation__white );
 @themeNavigation__dropdownShadowColor: rgba( 0,0,0,.1 );
 @themeNavigation__dropdownLinkHeight: @themeNavigation__linkHeight;
-@themeNavigation__dropdownAlignmentEdge: @themeNavigation__alignment;
+@themeNavigation__dropdownAlignmentEdge: left;
 
 /* Mobile */
 
@@ -81,7 +79,7 @@
 
 .themeNavigation {
 	background-color: @themeNavigation__backgroundColor;
-	font-size: @themeNavigation__fontSize;
+	font-size: 1em;
 	display: flex;
 	width: 100%;
 	.themeNavigation__before,
@@ -109,7 +107,7 @@
 			flex: 1 0 100%;
 			margin-bottom: 0;
 			padding-left: 0;
-			text-align: @themeNavigation__alignment;
+			text-align: center;
 			white-space: nowrap;
 		}
 		& when not ( @themeNavigation__mobileBreakpoint = auto ) {
@@ -153,7 +151,7 @@
 		transform: @transformation;
 	}
 	.themeNavigation-arrow {
-		color: @themeNavigation__arrowColor;
+		color: @themeNavigation__linkColor;
 		width: 0;
 		height: auto;
 		position: relative;
@@ -287,7 +285,7 @@
 			text-align: left;
 			a {
 				background-color: @themeNavigation__linkBackgroundColor;
-				font-weight: @themeNavigation__linkWeight;
+				font-weight: normal;
 				padding: 0 @themeNavigation__linkHorizontalPadding;
 				margin-top: 0;
 				&:hover, &:focus {
@@ -304,7 +302,7 @@
 					border-color: @themeNavigation__borderTopColorHover @themeNavigation__borderRightColorHover @themeNavigation__borderBottomColorHover @themeNavigation__borderLeftColorHover;
 				}
 				.themeNavigation-arrow {
-					color: @themeNavigation__arrowColorHover;
+					color: @themeNavigation__linkColorHover;
 				}
 				.themeNavigation__caret {
 					.themeNavigation__transform( rotateX( 180deg ) );
@@ -320,7 +318,7 @@
 					border-color: @themeNavigation__borderTopColorActive @themeNavigation__borderRightColorActive @themeNavigation__borderBottomColorActive @themeNavigation__borderLeftColorActive;
 				}
 				.themeNavigation-arrow {
-					color: @themeNavigation__arrowColorActive;
+					color: @themeNavigation__linkColorActive;
 				}
 			}
 		}
@@ -448,17 +446,6 @@
 		perspective: unset; // parallax
 	}
 }
-
-// Redefine @themeNavigation__* variables below. It's recommended that you redefine these variables
-// instead of applying your own CSS to the navigation system whenever possible.
-
-@themeNavigation__black: @black;
-@themeNavigation__white: @white;
-@themeNavigation__backgroundColor: @backgroundColor;
-@themeNavigation__alignment: center; // Referencing the variable this way removes quotes.
-@themeNavigation__linkHeight: 3rem;
-@themeNavigation__linkBackgroundColorActive: mix( @themeNavigation__backgroundColor, contrast( @themeNavigation__backgroundColor, @black, @white ), 90% );
-@themeNavigation__mobileHamburgerAlignment: right;
 
 .navigation {
 	border-bottom: 5px solid @accentColor;
