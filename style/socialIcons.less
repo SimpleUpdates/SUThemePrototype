@@ -1,14 +1,14 @@
 // ------ Social Links Variables ------
 // Variables intended to be changed
-//@socialLinks__alignment: left;
+@socialLinks__alignment: left;
 @socialLinks__touchTargetSize: 48px;
 @socialLinks__iconSize: 18px;
-//@socialLinks__iconColor: white;
-//@socialLinks__iconColorHover: @socialLinks__iconColor;
+@socialLinks__iconColor: white;
+@socialLinks__iconColorHover: @socialLinks__iconColor;
 @socialLinks__iconBackgroundSize: 35px;
-//@socialLinks__iconBackgroundColor: black;
-//@socialLinks__iconBackgroundColorHover: @socialLinks__iconBackgroundColor;
-//@socialLinks__iconBackgroundRadius: 50%;
+@socialLinks__iconBackgroundColor: black;
+@socialLinks__iconBackgroundColorHover: @socialLinks__iconBackgroundColor;
+@socialLinks__iconBackgroundRadius: 50%;
 @socialLinks__hoverScale: .9;
 @socialLinks__hoverSpeed: .2s;
 
@@ -16,7 +16,7 @@
 @socialLinks__innerMargin: ( @socialLinks__touchTargetSize - @socialLinks__iconBackgroundSize ) / 2;
 
 .socialLinks {
-	text-align: right;
+	text-align: @socialLinks__alignment;
 	margin: 0;
 	padding: 0;
 	li {
@@ -36,16 +36,13 @@
 				left: @socialLinks__innerMargin;
 				bottom: @socialLinks__innerMargin;
 				right: @socialLinks__innerMargin;
-				//border-radius: @socialLinks__iconBackgroundRadius;
-				border-radius: 50%;
-				//background-color: @socialLinks__iconBackgroundColor;
-				background-color: @darkGray;
+				border-radius: @socialLinks__iconBackgroundRadius;
+				background-color: @socialLinks__iconBackgroundColor;
 			}
 			svg {
 				height: @socialLinks__iconSize;
 				width: @socialLinks__iconSize;
-				//color: @socialLinks__iconColor;
-				color: @white;
+				color: @socialLinks__iconColor;
 				position: relative;
 				z-index: 10;
 
@@ -59,16 +56,22 @@
 			}
 			&:hover svg, &:hover::before {
 				transform: scale( @socialLinks__hoverScale );
-				//color: @socialLinks__iconColorHover;
-				color: @white;
+				color: @socialLinks__iconColorHover;
 			}
 			&:hover::before {
-				//background-color: @socialLinks__iconBackgroundColorHover;
-				background-color: @grayDark;
+				background-color: @socialLinks__iconBackgroundColorHover;
 			}
 		}
 	}
 }
+
+@socialLinks__alignment: right;
+@socialLinks__iconSize: 16px;
+@socialLinks__iconColor: @white;
+@socialLinks__iconColorHover: @grayBleached;
+@socialLinks__iconBackgroundSize: 28px;
+@socialLinks__iconBackgroundColor: @grayDark;
+@socialLinks__hoverScale: 1;
 
 .socialIcons {
 	clear: both;
