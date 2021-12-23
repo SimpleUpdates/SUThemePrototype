@@ -11,7 +11,7 @@
 			{% set email	= ( email is defined )    ? email    : su.site.email %}
 
 			<div class="contentFooter no-print">
-				<div class="address-box no-print col-xs-6">
+				<div class="address-box no-print col-6">
 					<strong>
 						<span class="sitename">{{ siteName|e|replace( {'®': '<sup><small>&reg;</small></sup>'} )|raw }}</span>
 					</strong>
@@ -20,7 +20,7 @@
 					{% if city %}{{ city }}, {% endif %}{% if state %}{{ state }} {{ zip }}<br />{% endif %}
 					{% if phone %}<a class="phone" href="tel:{{ phone }}">{{ phone }}</a>{% endif %}
 				</div>
-				<div class="social-search col-xs-6">
+				<div class="social-search col-6">
 					{% include "partial/search.html" %}
 					{% include "partial/socialIcons.html" %}
 				</div>
