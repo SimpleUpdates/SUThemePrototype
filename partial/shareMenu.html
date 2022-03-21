@@ -3,7 +3,7 @@
 {% if sharelinks is not empty %}
 	<div class="content-shareMenu btn-group no-print">
 		<button type="button" class="button bleached dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Share <span class="caret"></span>
+			{{ share_label }} <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu pull-right">
 			{% for sharelink in sharelinks %}
